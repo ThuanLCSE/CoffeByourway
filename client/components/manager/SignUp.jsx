@@ -1,5 +1,9 @@
 import React from 'react';  
 
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
+
 import DialogMessage from './../utils/DialogMessage'; 
 
 class SignUp extends React.Component{
@@ -17,7 +21,6 @@ class SignUp extends React.Component{
         this.getValueSignUp = this.getValueSignUp.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
 
     getValueSignUp() {
     	if (this.state.password !== this.state.confirmPassword){
@@ -43,34 +46,31 @@ class SignUp extends React.Component{
         }
     }
 
-
     render(){
         return (
-            <div>
-               Email:
-               <input type = "text" name = "email" value ={this.state.manager.email}
-               onChange={(e) => this.handleChange('email', e)}
-               />
-               <br/>
-               Password:
-               <input type = "text" name= "password" value ={this.state.manager.password}
-               onChange={(e) => this.handleChange('password', e)}
-               />
-               <br/>
-                Confirm password:
-               <input type = "text" name= "confirmPassword" value ={this.state.manager.confirmPassword}
-               onChange={(e) => this.handleChange('confirmPassword', e)}  />
-               <p>{this.state.error}</p>
-               <br/>
-                Full name:
-               <input type = "text" name= "fullName" value ={this.state.manager.fullName}
-               onChange={(e) => this.handleChange('fullName', e)}
-               />
-               <br/>
-               <button onClick={this.getValueSignUp}>Sign Up </button>
+            <Paper style={{padding: 15, marginTop: 25, height: '60vh'}}>
+                <TextField  floatingLabelText="Your name"
+                            defaultValue={this.state.manager.fullName}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('fullName', e)}/><br/>
+                <TextField  floatingLabelText="Your email"
+                            defaultValue={this.state.manager.email}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('email', e)}/><br/>
+                <TextField  type="password"
+                            floatingLabelText="Your password"
+                            defaultValue={this.state.manager.password}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('password', e)}/><br/>
+                <TextField  type="password"
+                            floatingLabelText="Confirm password"
+                            defaultValue={this.state.manager.confirmPassword}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('confirmPassword', e)}/><br/><br/>
+               <RaisedButton label="Sign Up" primary={true} onClick={this.getValueSignUp}/>
                <DialogMessage closeMessage = {this.props.clearMessage}
                               message= {this.props.managerStore.message}/>
-            </div>
+            </Paper>
         );
     }
 };

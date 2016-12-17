@@ -1,4 +1,8 @@
-import React from 'react';  
+import React from 'react';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 import DialogMessage from './../utils/DialogMessage'; 
 
@@ -15,7 +19,6 @@ class SignIn extends React.Component{
         this.handleChange = this.handleChange.bind(this);
     }
 
-
     getValueSignIn() {
         var managerData = this.state.manager;
         this.props.signInFunc(managerData);
@@ -29,24 +32,22 @@ class SignIn extends React.Component{
         });
     }
 
-
     render(){
         return (
-            <div>
-               Email:
-               <input type = "text" name = "email" value ={this.state.manager.email}
-               onChange={(e) => this.handleChange('email', e)}
-               />
-               <br/>
-               Password:
-               <input type = "text" name= "password" value ={this.state.manager.password}
-               onChange={(e) => this.handleChange('password', e)}
-               />
-               <br/>
-               <button onClick={this.getValueSignIn}>Sign In</button>
-               <DialogMessage closeMessage = {this.props.clearMessage}
+            <Paper style={{padding: 15, marginTop: 25, height: '30vh'}}>
+                <TextField  floatingLabelText="Your email"
+                            defaultValue={this.state.manager.email}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('email', e)}/><br/>
+                <TextField  type="password"
+                            floatingLabelText="Your password"
+                            defaultValue={this.state.manager.password}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('password', e)}/><br/><br/>
+                <RaisedButton label="Sign In" primary={true} onClick={this.getValueSignIn}/>
+                <DialogMessage closeMessage = {this.props.clearMessage}
                               message= {this.props.managerStore.message}/>
-            </div>
+            </Paper>
         );
     }
 };

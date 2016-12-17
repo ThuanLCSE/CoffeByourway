@@ -2,7 +2,7 @@ import React from 'react';
 import Upload from 'rc-upload';  
 
 import RaisedButton from 'material-ui/RaisedButton';
-import {uploadFileUrl} from './../../constant/ApiUri';
+import {uploadFileUrl, hostServer} from './../../constant/ApiUri';
 
 
 
@@ -45,9 +45,10 @@ class UploadImg extends React.Component{
           onSuccess={this.onSuccessUpload}
           onProgress={this.onProgressUpload}
           beforeUpload={this.beforeUpload}>
-            <RaisedButton label={this.props.buttonName}/>
+            <RaisedButton primary={true} label={this.props.buttonName}/>
           </Upload>
-          {this.state.previewUrl?<img src={this.state.previewUrl}/>:null}
+          <br/>
+          {this.state.previewUrl ? <img className="UploadImg" src={hostServer + this.state.previewUrl}/>:null}
         </div>
     )
   } 
