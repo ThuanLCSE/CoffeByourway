@@ -1,14 +1,13 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog'; 
+import Dialog from 'material-ui/Dialog';
 import {hostServer} from './../../constant/ApiUri';
- 
-import CanvasEditor from './../utils/CanvasEditor.jsx';  
-import DrawingControl from './../utils/DrawingControl.jsx';  
 import WaitingModal from './../utils/WaitingModal.jsx';  
 import ChooseMainTypeModal from './ChooseMainTypeModal.jsx';  
 
+import CanvasEditor from './../utils/CanvasEditor.jsx';
+import DrawingControl from './../utils/DrawingControl.jsx';
 
 class CustomCup extends React.Component {
     constructor(props) {
@@ -16,9 +15,9 @@ class CustomCup extends React.Component {
         this.state = {     
             step: 'first'
         };
-     
+
         this.submitAfterHavePreview = this.submitAfterHavePreview.bind(this);
-         
+
            // this.colorItem = this.colorItem.bind(this);
 
  
@@ -33,7 +32,7 @@ class CustomCup extends React.Component {
          
 
 
-         // this.handleChangeRecommend = this.handleChangeRecommend.bind(this); 
+         // this.handleChangeRecommend = this.handleChangeRecommend.bind(this);
 
 
     }
@@ -41,11 +40,11 @@ class CustomCup extends React.Component {
         this.props.getFirstStepCustomData();
     }
     
-    componentDidMount(){ 
+    componentDidMount(){
       setTimeout(function(){
           this.callApplyCupCanvas(); 
       }.bind(this),1000);
-         
+
     }
     componentDidUpdate(prevProps, prevState){
      
@@ -56,24 +55,25 @@ class CustomCup extends React.Component {
     }
     
 
+
     callAddPatternToShirt(top, left, scale){
       var patternId = this.state.imgPaternTagId;
-      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale); 
+      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale);
     }
 
     callApplyCupCanvas(){ 
       document.getElementById('applyCupCanvas').click(); 
     }
-    callApplyColorChange(){ 
-     document.getElementById('applyColorChange').click(); 
+    callApplyColorChange(){
+     document.getElementById('applyColorChange').click();
     }
     componentDidUpdate(prevProps, prevState){
-     
-      
-    } 
-  
+
+
+    }
+
     takePreviewBeforSubmit() {
-      document.getElementById('screenShot').click(); 
+      document.getElementById('screenShot').click();
     }
     submitAfterHavePreview(e) {
        console.log('submit')
@@ -161,17 +161,18 @@ class CustomCup extends React.Component {
     render() {
         return (
             <div className="container">
-            
-                <div className="col-sm-3">
-                   <DrawingControl/>
+
+                <div className="col-sm-4">
+
                 </div>
- 
-                <Paper className="col-sm-5" style={{height:'80vh'}}> 
-                          <CanvasEditor />  
+
+                <Paper className="col-sm-5" style={{height:'80vh'}}>
+                          <CanvasEditor />
                 </Paper>
                 <div className="col-sm-3">
-         
+
                     <Paper style={{height:'80vh'}}>
+                         <DrawingControl />
                         Current Type: {this.props.drinkStore.currentMainDrink}
                         {this.state.step === "second"?this.listSecondRecipe():null}
                         {this.state.step === "third"?this.listThirdRecipe():null}
@@ -188,7 +189,7 @@ class CustomCup extends React.Component {
                   onClick = {(e) => this.handleChangeRecommend('rotate', e)} />
                   <input type="hidden" id="screenShotUrl"
                   onClick = {(e) => this.submitAfterHavePreview(e)} />
-                  
+
             </div>
         );
     }

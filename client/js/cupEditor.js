@@ -6,6 +6,10 @@ var line2;
 var line3;
 var line4;
 
+
+
+
+
 var applyColor = function(){
 	$('.color-preview').click(function(){
 		   var color = $(this).css("background-color");
@@ -53,19 +57,20 @@ var applyCanvasAndIngrident = function() {
 			 // $('#patternTop')[0].dispatchEvent(event);
 			 // $('#patternLeft')[0].dispatchEvent(event);
 
-	 		canvas = new fabric.Canvas('cupCanvas', {
+	 		canvas = this.__canvas = new fabric.Canvas('cupCanvas', {
 			  hoverCursor: 'pointer',
 			  selection: false,
 			  selectionBorderColor:'blue',
 			  isDrawingMode: true
 			});
-			 
+
 			fabric.Object.prototype.transparentCorners = false;
 
-			canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-			console.log(canvas.freeDrawingBrush);
-			 canvas.freeDrawingColor;
-	   		canvas.freeDrawingBrush.width;
+
+			//
+			// console.log(canvas.freeDrawingBrush);
+			//  canvas.freeDrawingColor;
+	   		canvas.freeDrawingBrush.width = 20;
 	   		canvas.freeDrawingBrush.shadowBlur;
 
 				canvas.on({
@@ -78,10 +83,10 @@ var applyCanvasAndIngrident = function() {
 				    $('#patternLeft')[0].value = e.target.getLeft();
 				    $('#patternScale')[0].value = e.target.getScaleX();
 				    $('#patternAngle')[0].value = e.target.getAngle();
-				     $('#patternAngle').trigger("click");
+				    $('#patternAngle').trigger("click");
 				    $('#patternTop').trigger("click");
 				    $('#patternLeft').trigger("click");
-			        $('#patternScale').trigger("click");
+			      $('#patternScale').trigger("click");
 
 				    e.target.opacity = 1;
 				  },
@@ -95,9 +100,18 @@ var applyCanvasAndIngrident = function() {
 			    return target;
 			  };
 			})(canvas.findTarget);
+
 			$(".colorPicker").click(function(e){
 	  			 canvas.freeDrawingBrush.color = e.currentTarget.style.backgroundColor;
 			});
+
+			$('#drawWidth')[0].onchange = function() {
+		    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+		  
+  		};
+
+
+
 			// $(".colorPicker").click(function(e){
 	  // 			$("#cupPicture")[0].src = e.currentTarget.src;
 			// });
@@ -151,8 +165,8 @@ var applyCanvasAndIngrident = function() {
   applyCupCanvas.dispatchEvent(applyShirtCanvasEvent);
   applyCupCanvas.click = function(){
 	  	applyCanvasAndIngrident();
- 	} 
-    $( "#resetCanvas" ).click(function() { 
+ 	}
+    $( "#resetCanvas" ).click(function() {
 		 	canvas = null;
 	 });
 
@@ -166,7 +180,7 @@ var applyCanvasAndIngrident = function() {
   var addPatternToShirt = document.getElementById('addPatternToShirt');
   addPatternToShirt.dispatchEvent(addPatternEvent);
   addPatternToShirt.click = function(patternId,left, top,scale){
-	  	setPatternIntoCanvas(patternId,left, top,scale);
+	setPatternIntoCanvas(patternId,left, top,scale);
  	}
  	var colorEvent = new MouseEvent('click', {
     'view': window,
@@ -182,7 +196,7 @@ var applyCanvasAndIngrident = function() {
  	}
 
   //html2canvas
-   $( "#screenShot" ).click(function() { 
+   $( "#screenShot" ).click(function() {
 
 			var img = canvas._objects[0];
 

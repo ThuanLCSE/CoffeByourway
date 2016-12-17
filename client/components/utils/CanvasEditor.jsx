@@ -1,26 +1,37 @@
-import React from 'react'; 
+import React from 'react';
 import {hostServer} from './../../constant/ApiUri';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class CanvasEditor extends React.Component {
     constructor(props) {
-        super(props); 
-        this.state = {           
+        super(props);
+        this.state = {
             canvas: {
               height: 200,
               width: 200
-            }  
+            },
+            cup: {
+              bot: 0,
+              height: 0
+            }
         };
-      
-        this.mainCanvas = this.mainCanvas.bind(this); 
 
-    } 
-    componentDidMount() { 
-        var mountedCanvas = this.state.canvas; 
+        this.mainCanvas = this.mainCanvas.bind(this);
+
+    }
+    componentDidMount() {
+        var mountedCanvas = this.state.canvas;
+        var mountedCup = this.state.cup;
         // document.getElementById('cupPicture')
         mountedCanvas.width = this.refs.cupPicture.clientWidth;
         mountedCanvas.height = mountedCanvas.width * 3/2;
-        this.setState({ canvas: mountedCanvas });
+
+        mountedCup.bot = this.refs.cupPicture.clientWidth*39/126;
+        mountedCup.height = this.refs.cupPicture.clientWidth * 27/100;
+
+        this.setState({ canvas: mountedCanvas,
+                        cup:  mountedCup
+                });
     }
     canvasControl(){
         let styleAlignCenter = {
@@ -37,17 +48,17 @@ class CanvasEditor extends React.Component {
         return(
 
               <div className="pull-right"  id="imageeditor">
-                <RaisedButton  id="remove-selected" label={<i className="fa fa-trash" aria-hidden="true"> Remove</i>} secondary={true}/> 
+                <RaisedButton  id="remove-selected" label={<i className="fa fa-trash" aria-hidden="true"> Remove</i>} secondary={true}/>
               </div>
           )
       }
    	mainCanvas(){
 
         let drawingAreae = {
-          position: 'absolute', 
+          position: 'absolute',
           top: 0,
           left: 0,
-          zIndex: 100, 
+          zIndex: 100,
           width: '100%',
           height: '100%'
         }
@@ -61,7 +72,7 @@ class CanvasEditor extends React.Component {
 
             position: 'relative'
         }
-        let cupLayout = { 
+        let cupLayout = {
             width: '100%',
             height: '100%'
         }
@@ -75,27 +86,60 @@ class CanvasEditor extends React.Component {
 
         }
 
-console.dir(this.state.canvas);
-      // if(this.state.canvas.width === 200) {
-      //   return <div>loading....</div>
-      // } else {
+
+
+
         return(
               <div id="cupShot" className="page" style={cupShot}>
-                <img src={hostServer +  "static/PaperCupPatternPlatform.png"} style={cupLayout}></img>
-                <div id="drawingArea" style={drawingAreae}>
-                  <img ref="cupPicture" src={hostServer +  "static/PaperCupPatternLayOut.png"} 
-                  className = "cupLayout" style={platform}/>
-                  <canvas id="cupCanvas" 
-                  height={this.state.canvas.height}
-                  width={this.state.canvas.width}
-                   className="hover" style={webKitUser}>
-                  </canvas>
-                </div>
+                <img src={hostServer +  "static/PaperCupDrinkPlatform.png"} style={cupLayout}></img>
+                <div style={{position: 'absolute', top:this.state.cup.bot, right: 0}}>
+                        <div
+                          style = {{
+                            height:this.state.cup.height,
+                            width:this.state.canvas.width/2
+                          }}
+                        >
+                        </div>
+                        <div
+                          style = {{
+                            height:this.state.cup.height,
+                            width:this.state.canvas.width/2
+                          }}
+                        >
+                        </div>
+                        <div
+                          style = {{
+                            height:this.state.cup.height,
+                            width:this.state.canvas.width/2
+                          }}
+                        >
+                        </div>
+                        <div
+                          style = {{
+                            height:this.state.cup.height,
+                            width:this.state.canvas.width/2
+                          }}
+                        >
+                        </div>
+
+                  </div>
+
+
+
+                    <div id="drawingArea" style={drawingAreae}>
+                      <img ref="cupPicture" src={hostServer +  "static/PaperCupDrinkLayOut.png"}
+                      className = "cupLayout" style={platform}/>
+                      <canvas id="cupCanvas"
+                      height={this.state.canvas.height}
+                      width={this.state.canvas.width}
+                       className="hover" style={webKitUser}>
+                      </canvas>
+                    </div>
               </div>
         )
       // }
     }
-    render() { 
+    render() {
         return (
            <div>
            		{this.mainCanvas()}

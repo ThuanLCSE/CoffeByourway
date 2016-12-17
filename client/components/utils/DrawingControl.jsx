@@ -1,9 +1,9 @@
-import React from 'react';  
+import React from 'react';
 
 class CanvasEditor extends React.Component {
     constructor(props) {
-        super(props); 
-        this.state = {           
+        super(props);
+        this.state = {
             listColorDefault : [
 
               {key: 1, value: '#ffffff', name: '#ffffff'},
@@ -22,49 +22,67 @@ class CanvasEditor extends React.Component {
               {key: 78, value: '#87D37C', name: '#87D37C'},
               {key: 89, value: '#36D7B7', name: '#36D7B7'},
               {key: 90, value: '#26C281', name: '#26C281'}
-           ]
+           ],
+           drawMode: '',
+           lineWidth: '',
         };
-      
-        this.colorCheckList = this.colorCheckList.bind(this); 
+
+        this.colorCheckList = this.colorCheckList.bind(this);
         this.colorControl = this.colorControl.bind(this);
 
+        this.widthControl = this.widthControl.bind(this);
 
-    } 
-    colorItem(color){ 
+    }
+    colorItem(color){
       let colorPick = {
         backgroundColor: color.value,
-        width: '10px', 
-          height: '10px'
+        width: '20px',
+        height: '20px'
       }
 
 
        return (
-                    <button className="colorPicker" key = {color.key} 
-                              style = {colorPick} ></button>
+                    <button className="colorPicker" key = {color.key}
+                              style = {colorPick} >
+                    </button>
         )
     }
     colorCheckList(){
       return (
-            <div>
+            <div className = "form well">
                 {this.state.listColorDefault.map(this.colorItem)}
             </div>
         )
     }
 
-    colorControl(){ 
+    colorControl(){
         return (
           <div className="form well">
             {this.colorCheckList()}
           </div>
         )
     }
-    
-    render() { 
+
+
+  
+
+    widthControl(){
+        return(
+            <div>
+                  <input type="number" id="drawWidth" />
+            </div>
+        )
+    }
+
+    render() {
         return (
            <div>
-           		{this.colorControl()} 
+           		{this.colorControl()}
+
+              {this.widthControl()}
            </div>
         );
+
     }
 }
 
