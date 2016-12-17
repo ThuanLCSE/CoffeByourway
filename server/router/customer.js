@@ -6,5 +6,7 @@ module.exports = function(app){
 	.get(drinkContrl.getAllMainType);
 	app.route('/api/coffee/secondRecipe/:drinkId')
 	.get(drinkContrl.getDrinkByID, drinkContrl.getSecondRecipeByType);
+	app.route('/api/coffee/thirdRecipe/:drinkId')
+	.get(drinkContrl.getDrinkByID, drinkContrl.getThirdRecipeByType);
 	
 }

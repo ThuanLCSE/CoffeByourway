@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var recipeSchema = new Schema({
+    level: String,
   	type : {
         type: String,  
         required: 'recipte type is required', 

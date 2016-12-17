@@ -36,6 +36,24 @@ exports.getSecondRecipeByType = function(req,res){
 		  }
 	  });
 }
+exports.getThirdRecipeByType = function(req,res){
+	Drink.findOne({ 
+		  	step: 'Third',
+		  	type: req.drink.type
+	  	 }, function (err, drink) {
+		  if (err) {
+		  	res.status(400).send(err);
+		  } else if (drink === null) {
+	 		res.status(400).send('not found second drink recipw');
+		  } else { 
+	  		res.status(200).send({
+			  		recipes: drink.recipe,
+			  		message: "get second recipe success",
+			  	});
+				
+		  }
+	  });
+}
 
 exports.getDrinkByID = function(req,res,next){
 	Drink.findById(req.param('drinkId')).exec(function (err, drink) {
