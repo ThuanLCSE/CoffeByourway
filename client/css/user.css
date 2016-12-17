@@ -1,0 +1,12 @@
+.TextCover {
+    width: 24vw;
+    margin: 6vh 11vw;
+    padding: 2vh 2vw;
+    border: 6px solid white;
+    cursor: pointer;
+}
+
+.TextCover:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 1s;
+}
