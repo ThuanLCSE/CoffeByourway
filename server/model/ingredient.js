@@ -11,6 +11,11 @@ var IngredientSchema = new Schema({
         required: 'recipte img is required', 
         trim: true
     }, 
+    icon: {
+        type: String,  
+        required: 'recipte icon is required', 
+        trim: true
+    },
     price: {
       type: Number, 
         default: 0

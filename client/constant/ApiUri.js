@@ -7,6 +7,8 @@ export const managerSignUp = hostServer + 'api/mng/signUp'
 export const managerSignOut = hostServer + 'api/mng/signOut'
 export const createIngredient = hostServer + 'api/ingre/create'
 export const listAllIngredient = hostServer + 'api/ingre/getAll'
-export const uploadFileUrl = hostServer + 'api/upload'
+export const uploadFileUrl = hostServer + 'api/upload' 
+export const createDrink = hostServer + 'api/drink/create'
+
 
 

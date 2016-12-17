@@ -6,6 +6,13 @@ export const managerClearMessage = 'managerClearMessage'
 export const createIngredientSuccess = 'create ingre fail'   
 export const getListIngredientSuccess = 'getList ingre fail'    
 
+export const createMainDrinkSuccess = 'createMainDrinkSuccess'  
+export const createSecondRecipeSuccess = 'createSecondRecipeSuccess '   
+export const createThirdRecipeSuccess = 'createThirdRecipeSuccess '    
+
+
+
+
 
 
 

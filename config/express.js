@@ -27,14 +27,14 @@ module.exports = function(database) {
 		resave: true,
 		secret: configDetail.secretKey
 	}));
-
+		app.use(cors({
+		        origin: 'http://localhost:3013',
+		        credentials: true
+                 }));
 	app.use('/static', expressWebAppFramwrk.static(path.join(__dirname, './../static')));
 	app.use('/upload', expressWebAppFramwrk.static(path.join(__dirname, './../upload')));
 
-	app.use(cors({
-        origin: 'http://localhost:3013',
-        credentials: true
-                 }));
+	
 	require('../server/router/react.component.js')(app);
 	require('../server/router/customer.js')(app);   
 	require('../server/router/imageUpload.js')(app);   

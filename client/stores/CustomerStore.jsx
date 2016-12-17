@@ -10,13 +10,9 @@ export default function CustomCup(state = defaultState, action) {
   switch (action.type) { 
     case actType.getMainTypeSuccess:
           newState.listType = action.listType;
-          newState.message = action.message; 
-          return newState;
-          
+          newState.message = action.message;  
     case actType.getMainTypeFail:
-          newState.message = action.message; 
-          return newState;
-    default:
-      return state;
+          newState.message = action.message;  
   }
+      return state;
 }

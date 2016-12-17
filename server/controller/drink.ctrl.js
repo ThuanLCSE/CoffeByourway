@@ -1,21 +1,22 @@
 var Drink = require('mongoose').model('Drink');  
  
 exports.create = function(req,res){
-	// var newDrink = new Drink({ 
- //    	price : 
-	// 	step
-	// 	type
-	// 	typeImg
-	// 	recipe
-	// });
+	var newDrink = new Drink({ 
+    	price : req.body.price,
+		step : req.body.step,
+		type : req.body.type,
+		typeImg: req.body.typeImg,
+		typeIcon: req.body.typeIcon,
+		recipe: req.body.recipe
+	});
 	
-  	newShirt.save(function (err, shirt) {
+  	newDrink.save(function (err, drink) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 
 	  	res.status(200).send({
-	  		shirt : shirt,
-	  		message : 'create success',
+	  		drink : drink,
+	  		message : 'create new drink success',
 	  	});
 	  }
   });

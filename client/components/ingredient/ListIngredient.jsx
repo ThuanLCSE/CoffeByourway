@@ -14,6 +14,7 @@ class ListIngredient extends React.Component{
              <tr>
                <th>Type name</th>
                <th>Img</th>
+               <th>Icon</th>
                <th>Price</th> 
                <th>Action</th>
              </tr>

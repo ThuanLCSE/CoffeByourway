@@ -55,7 +55,8 @@ export function createIngredient(data) {
 	var newIngredient = {
 		type: data.type,
 		img: data.img,
-		price : data.price
+		price : data.price,
+		icon : data.icon
 	}
     return function (dispatch) {
 	  	return restApi.post(api.createIngredient,newIngredient).then((response) => {
@@ -72,6 +73,80 @@ export function createIngredient(data) {
 		});
 	};
 }
+export function createMainDrinkType(data) {
+	
+	// listAllIngredient
+	var newMainDrink = {
+		price: data.price,
+		step: 'First',
+		type: data.type,
+		typeImg: data.img,
+		typeIcon: data.icon,
+		recipe: []
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.createDrink,newMainDrink).then((response) => {
+	    	
+	       dispatch({ type: actType.createMainDrinkSuccess,
+                     drink : response.drink,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+
+export function createSecondDrinkType(data) {
+	
+	// listAllIngredient
+	var newSecondDrink = { 
+		step: 'Second',
+		type: data.type, 
+		recipe: data.recipe
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.createDrink,newSecondDrink).then((response) => {
+	    	
+	       dispatch({ type: actType.createSecondRecipeSuccess,
+                     drink : response.drink,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+export function createThirdDrinkType(data) {
+	
+	// listAllIngredient
+	var newThirdDrink = { 
+		step: 'Third',
+		type: data.type, 
+		recipe: data.recipe
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.createDrink,newThirdDrink).then((response) => {
+	    	
+	       dispatch({ type: actType.createThirdRecipeSuccess,
+                     drink : response.drink,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+
 export function getListIngredient() { 
     return function (dispatch) {
 	  	return restApi.get(api.listAllIngredient).then((response) => { 

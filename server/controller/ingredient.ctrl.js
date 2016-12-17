@@ -4,7 +4,8 @@ exports.create = function(req,res){
 	var newIngredient = new Ingredient({ 
     	type: req.body.type,
 		img: req.body.img,
-		price: req.body.price
+		price: req.body.price,
+		icon: req.body.icon
 	});
 	
   	newIngredient.save(function (err, ingredient) {

@@ -7,6 +7,11 @@ var recipeSchema = new Schema({
         required: 'recipte type is required', 
         trim: true
     },
+    icon:{
+        type: String,  
+        required: 'recipte img is required', 
+        trim: true
+    },
 	 img : {
         type: String,  
         required: 'recipte img is required', 
@@ -17,7 +22,7 @@ var recipeSchema = new Schema({
         default: 0
     },
     price: {
-      type: Number, 
+        type: Number, 
         default: 0
     }
 });
@@ -35,6 +40,7 @@ var drinkSchema = new Schema({
         trim: true
     },
   	typeImg: String,
+    typeIcon: String,
   	recipe: [recipeSchema]
 });
 var Drink = mongoose.model('Drink',drinkSchema);
