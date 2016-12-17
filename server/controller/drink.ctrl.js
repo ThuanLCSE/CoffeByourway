@@ -1,5 +1,26 @@
 var Drink = require('mongoose').model('Drink');  
  
+exports.create = function(req,res){
+	// var newDrink = new Drink({ 
+ //    	price : 
+	// 	step
+	// 	type
+	// 	typeImg
+	// 	recipe
+	// });
+	
+  	newShirt.save(function (err, shirt) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		shirt : shirt,
+	  		message : 'create success',
+	  	});
+	  }
+  });
+};
+
 exports.getAllMainType = function(req,res){ 
   	Drink.find({ 
 	  	step: 'First'

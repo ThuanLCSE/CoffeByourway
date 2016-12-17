@@ -5,3 +5,6 @@ export const getThirdRecipeByType = hostServer + 'api/coffee/thirdRecipe/'//:dri
 export const managerSignIn = hostServer + 'api/mng/signIn'
 export const managerSignUp = hostServer + 'api/mng/signUp'
 export const managerSignOut = hostServer + 'api/mng/signOut'
+export const createIngredient = hostServer + '/api/ingre/create'
+export const listAllIngredient = hostServer + '/api/ingre/getAll'
+

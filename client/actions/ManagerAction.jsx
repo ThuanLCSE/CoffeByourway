@@ -49,3 +49,26 @@ export function clearMessage() {
             }
                    
 } 
+export function createIngredient(data) {
+	
+	// listAllIngredient
+	var signUpdata = {
+		email: data.email,
+		password: data.password,
+		fullName : data.fullName
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.createIngredient,signUpdata).then((response) => {
+	    	
+	       dispatch({ type: actType.managerAuthSuccess,
+                     manager : response.manager,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerAuthFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
