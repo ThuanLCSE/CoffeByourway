@@ -50,6 +50,4 @@ var Drink = mongoose.model('Drink',drinkSchema);
 // 	} else  {
 // 		console.log(doctor);
 // 	}
-// }) 
-
-module.exports = Drink;
+// })  

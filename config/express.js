@@ -37,6 +37,8 @@ module.exports = function(database) {
                  }));
 	require('../server/router/react.component.js')(app);
 	require('../server/router/customer.js')(app);   
+	require('../server/router/imageUpload.js')(app);   
+	require('../server/router/manager.js')(app);   
 
 	return server;
 }

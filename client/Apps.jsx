@@ -13,6 +13,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 
+import Manager from './components/Manager'; 
 import Home from './components/Home'; 
 
 let store = createStore(
@@ -27,6 +28,7 @@ if(typeof window !== 'undefined') {
         <MuiThemeProvider>
         <Router history = {browserHistory}>
                 <Route path = "/" component = {Home}/> 
+                <Route path = "/manager" component = {Manager}/> 
           </Router>
         </MuiThemeProvider>
     </Provider>,

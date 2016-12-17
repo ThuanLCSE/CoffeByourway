@@ -14,27 +14,24 @@ class Home extends React.Component{
         };
         this.changeStateView = this.changeStateView.bind(this); 
     }   
-    changeStateView(page){
-        if (page === 'NewPattern' || page === 'CustomShirt'){
-          document.getElementById("resetCanvas").click();
-        }
+    changeStateView(page){ 
         this.setState({
             view : page
         });
     }
- 	homeView(){
- 		return(
- 				<Welcome/>
- 			)
- 	}
-	  render(){
-	    return(
+   	homeView(){
+   		return(
+   				<Welcome/>
+   			)
+   	}
+  	  render(){
+  	    return(
 
-	      <z> 
-	        {this.state.view === 'home'?this.homeView():null} 
-	      </z>
-	    );
-	  }
+  	      <z> 
+  	        {this.state.view === 'home'?this.homeView():null} 
+  	      </z>
+  	    );
+  	  }
 }
 
 const mapStateToProps = state => ({ 

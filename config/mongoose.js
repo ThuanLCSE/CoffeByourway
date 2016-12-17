@@ -5,6 +5,8 @@ module.exports = function(){
 	var noSqlDb = mongoose.connect(configDetail.dbUrl);
  
 	require('../server/model/drink');  
+	require('../server/model/customCup');  
+	require('../server/model/manager');  
 
 	return noSqlDb;
 }

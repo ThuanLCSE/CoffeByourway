@@ -12,7 +12,7 @@ module.exports = function(app) {
     },
     childRoutes: [
       {
-        path: '/demo',
+        path: '/manager',
         component: require('./../../client/Apps')
       } 
     ]
