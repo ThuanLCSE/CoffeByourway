@@ -7,6 +7,7 @@ module.exports = function(){
 	require('../server/model/drink');  
 	require('../server/model/customCup');  
 	require('../server/model/manager');  
+	require('../server/model/ingredient');  
 
 	return noSqlDb;
 }
