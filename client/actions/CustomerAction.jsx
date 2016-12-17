@@ -4,17 +4,73 @@ import * as actType from '../constant/ActionTypes';
 
 export function getFirstStepCustomData() { 
     return function (dispatch) {
-	  	return restApi.post(api.getAllMainType).then((response) => {
+	  	return restApi.get(api.getAllMainType).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: actType.getMainTypeSuccess,
-                     listType : response.listDrink,
+                     listMainDrink : response.listDrink,
                     message: response.message}
                    );
 	    }).catch((err) => {
 	    	console.log(err);
-	        dispatch({ type: actType.getMainTypeFail,
+	        dispatch({ type: actType.customerActionFail,
                      message: err.responseText
                     });
 		});
 	};
+} 
+export function getListSecondRecipe(type) { 
+
+    return function (dispatch) {
+        return restApi.get(api.getSecondRecipeByType + type).then((response) => {
+            console.log(response);
+           dispatch({ type: actType.getListSecondRecipe,
+                     listSecondRecipe : response.recipes,
+                    message: response.message}
+                   );
+        }).catch((err) => {
+            console.log(err);
+            dispatch({ type: actType.customerActionFail,
+                     message: err.responseText
+                    });
+        });
+    };
+} 
+export function getListThirdRecipe(type) { 
+
+    return function (dispatch) {
+        return restApi.get(api.getThirdRecipeByType + type).then((response) => {
+            console.log(response);
+           dispatch({ type: actType.getListThirdRecipe,
+                     listThirdRecipe : response.recipes,
+                    message: response.message}
+                   );
+        }).catch((err) => {
+            console.log(err);
+            dispatch({ type: actType.customerActionFail,
+                     message: err.responseText
+                    });
+        });
+    };
+} 
+
+export function changeMainType(type) { 
+    return { 
+    			type: actType.changeMainDrink,
+    			drinkType: type
+            }
+                   
+} 
+export function addSecondRecipe(recipe) { 
+    return { 
+                type: actType.addSecondRecipe,
+                recipe: recipe
+            }
+                   
+} 
+export function addThirdRecipe(recipe) { 
+    return { 
+                type: actType.addThirdRecipe,
+                recipe: recipe
+            }
+                   
 } 

@@ -40,15 +40,17 @@ class Home extends React.Component{
  	homeView(){
  		return(
  				<HomePage
-           changeView = {this.changeStateView}
-        />
+           changeView = {this.changeStateView} />
  			)
  	}
   CustomCup(){
       return(
-          <CustomCup
-
-          />
+          <CustomCup addSecondRecipe={this.props.CustomerAct.addSecondRecipe}
+                    changeMainType = {this.props.CustomerAct.changeMainType}
+                     getFirstStepCustomData = {this.props.CustomerAct.getFirstStepCustomData}
+                     getListSecondRecipe= {this.props.CustomerAct.getListSecondRecipe}
+                    getListThirdRecipe= {this.props.CustomerAct.getListThirdRecipe}
+                    drinkStore = {this.props.DrinkStore} />
       )
   }
 	  render(){

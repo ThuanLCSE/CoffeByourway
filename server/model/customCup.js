@@ -5,12 +5,12 @@ var recipeSchema = new Schema({
         type: String,  
         required: 'recipte type is required', 
         trim: true
-    },
-	img : {
+    }, 
+    level:  {
         type: String,  
-        required: 'recipte img is required', 
+        required: 'level is required', 
         trim: true
-    },
+    }, 
   	quantity: {
         type: Number, 
         default: 0

@@ -6,15 +6,25 @@ class ingredientItem extends React.Component{
   constructor(props){
 
     super(props); 
+    this.state = {
+      level: 1
+    }
     this.checkbox = this.checkbox.bind(this);
     this.removeButton = this.removeButton.bind(this);
     this.checkIngredient = this.checkIngredient.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this);
-    
+    this.handleLevel = this.handleLevel.bind(this);
 
 
   }
+  handleLevel(e){
+    this.setState({
+      level: e.target.value
+    });
+
+  }
   checkIngredient(e, isChecked,ingredient){
+    ingredient.level = this.state.level;
     this.props.tickIngredient(isChecked, ingredient);
   }
   removeIngredient(ingredientId){
@@ -22,8 +32,11 @@ class ingredientItem extends React.Component{
   }
   removeButton(ingredientId){
     return (
+      <div>
+          <input type="text" value={this.state.level} onChange={this.handleLevel}/>
           <button  onClick={() => this.removeIngredient(ingredientId)}>
           Remove </button>
+      </div>
       )
   }
       

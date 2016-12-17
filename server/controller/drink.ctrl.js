@@ -43,7 +43,7 @@ exports.getAllMainType = function(req,res){
 exports.getSecondRecipeByType = function(req,res){
 	Drink.findOne({ 
 		  	step: 'Second',
-		  	type: req.drink.type
+		  	type: req.param('drinkType') 
 	  	 }, function (err, drink) {
 		  if (err) {
 		  	res.status(400).send(err);
@@ -61,7 +61,7 @@ exports.getSecondRecipeByType = function(req,res){
 exports.getThirdRecipeByType = function(req,res){
 	Drink.findOne({ 
 		  	step: 'Third',
-		  	type: req.drink.type
+		  	type: req.param('drinkType') 
 	  	 }, function (err, drink) {
 		  if (err) {
 		  	res.status(400).send(err);

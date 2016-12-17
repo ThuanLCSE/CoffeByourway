@@ -4,9 +4,9 @@ module.exports = function(app){
 	 
 	app.route('/api/coffee/mainType')
 	.get(drinkContrl.getAllMainType);
-	app.route('/api/coffee/secondRecipe/:drinkId')
-	.get(drinkContrl.getDrinkByID, drinkContrl.getSecondRecipeByType);
-	app.route('/api/coffee/thirdRecipe/:drinkId')
-	.get(drinkContrl.getDrinkByID, drinkContrl.getThirdRecipeByType);
+	app.route('/api/coffee/secondRecipe/:drinkType')
+	.get(drinkContrl.getSecondRecipeByType);
+	app.route('/api/coffee/thirdRecipe/:drinkType')
+	.get(drinkContrl.getThirdRecipeByType);
 	
 }
