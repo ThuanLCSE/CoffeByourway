@@ -24,15 +24,18 @@ class HomePage extends React.Component{
         height: '100vh'
     }
     let buttonDiv = {
-        marginBottom: '50px'
+        marginBottom: '30px'
+    }
+    let height100 = {
+       height: '100%'
     }
 
 
 
     return (
       <div className = "container-fluid" style={fullHeight}>
-        <div className = "row">
-            <div className = "col-sm-6">
+        <div className = "row" style={height100}>
+            <div className = "col-sm-6" style={centerDiv}>
               <div className = "col-sm-12" style={buttonDiv}>
                 <RaisedButton  label="Create New Coffee"/>
               </div>
