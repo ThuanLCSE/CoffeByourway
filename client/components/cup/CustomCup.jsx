@@ -13,14 +13,15 @@ class CustomCup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {     
-            step: 'first'
+            step: 'first',
+            custom: 'ingredient'
         };
 
         this.submitAfterHavePreview = this.submitAfterHavePreview.bind(this);
 
            // this.colorItem = this.colorItem.bind(this);
 
- 
+        
          this.waitingProgress = this.waitingProgress.bind(this); 
          this.chooseMainTypeModal = this.chooseMainTypeModal.bind(this);
          this.recipeItem = this.recipeItem.bind(this);
@@ -29,28 +30,22 @@ class CustomCup extends React.Component {
          this.goSecondStep = this.goSecondStep.bind(this);
          this.listSecondRecipe = this.listSecondRecipe.bind(this);
          this.listThirdRecipe = this.listThirdRecipe.bind(this);
-         
-
-
-         // this.handleChangeRecommend = this.handleChangeRecommend.bind(this);
+         this.recipeThirdItem = this.recipeThirdItem.bind(this);
+         this.checkOutCup = this.checkOutCup.bind(this);
+ 
 
 
     }
     componentWillMount(){ 
         this.props.getFirstStepCustomData();
     }
-    
-    componentDidMount(){
-      setTimeout(function(){
-          this.callApplyCupCanvas(); 
-      }.bind(this),1000);
-
-    }
+     
     componentDidUpdate(prevProps, prevState){
      
-      if (this.props.drinkStore.listMainDrink.length > 0){
+      if (prevProps.drinkStore.listMainDrink.length === 0 && this.props.drinkStore.listMainDrink.length > 0){
         this.callApplyCupCanvas(); 
       } 
+
   
     }
     
@@ -66,11 +61,7 @@ class CustomCup extends React.Component {
     }
     callApplyColorChange(){
      document.getElementById('applyColorChange').click();
-    }
-    componentDidUpdate(prevProps, prevState){
-
-
-    }
+    } 
 
     takePreviewBeforSubmit() {
       document.getElementById('screenShot').click();
@@ -94,7 +85,16 @@ class CustomCup extends React.Component {
         )
     }
     chooseSecondRecipe(recipe){
+      this.setState({custom: 'ingredient'})
+      document.getElementById('handleIngredientPattern').value = recipe.img;
+      document.getElementById('handleIngredientPattern').click(recipe.level);
       this.props.addSecondRecipe(recipe);
+    }
+    chooseThirdRecipe(recipe){
+      this.setState({custom: 'ingredient'})
+      document.getElementById('handleIngredientPattern').value = recipe.img;
+      document.getElementById('handleIngredientPattern').click("4");
+      this.props.addThirdRecipe(recipe);
     }
     recipeItem(recipe, level){
       if (level === recipe.level){
@@ -115,30 +115,52 @@ class CustomCup extends React.Component {
        }
      
     }
+    recipeThirdItem(recipe){
+   
+       return(
+        <z key= {recipe._id}>
+          <z className="col-sm-3">{recipe.type}</z>  
+              <z className="col-sm-3">
+              <img height="20" width="20" onClick={() => this.chooseThirdRecipe(recipe)} 
+              src={hostServer +recipe.icon} />
+              </z> 
+              <z className="col-sm-3">{recipe.price} $</z> 
+        </z>
+      )
+     
+    }
+
     goThirdStep(){
+      this.setState({custom: 'ingredient'})
       this.props.getListThirdRecipe(this.props.drinkStore.currentMainDrink);
       this.setState({
         step: "third"
       });
     }
     goSecondStep(type){
+      this.setState({custom: 'ingredient'})
       this.props.getListSecondRecipe(type);
       this.setState({
         step: "second"
       });
     }
-// 
+    checkOutCup(){
+      console.log(this.props.customCup)
+    }
     listSecondRecipe(){
       return(
         <div>
           Level 1
-          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,1))}
+          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,"1"))}
+          <br/>
            Level 2
-          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,2))}
+          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,"2"))}
+          <br/>
            Level 3
-          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,3))}
+          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,"3"))}
+          <br/>
            Level 4
-          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,4))}
+          {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,"4"))}
           <button onClick={this.goThirdStep}>Next step</button>
         </div>
         )
@@ -147,13 +169,9 @@ class CustomCup extends React.Component {
       return(
         <div>
           Level 1
-          {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeItem(recipe,1))}
-           Level 2
-          {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeItem(recipe,2))}
-           Level 3
-          {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeItem(recipe,3))}
-           Level 4
-          {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeItem(recipe,4))}
+          {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeThirdItem(recipe))}
+          <br/>
+           <button onClick={this.checkOutCup}>Finish</button>
         </div>
         )
     }
@@ -163,33 +181,27 @@ class CustomCup extends React.Component {
             <div className="container">
 
                 <div className="col-sm-4">
-
+                  <DrawingControl customPattern = {() => this.setState({custom: 'pattern'})}/>
                 </div>
 
                 <Paper className="col-sm-5" style={{height:'80vh'}}>
-                          <CanvasEditor />
+                          <CanvasEditor custom = {this.state.custom}/>
                 </Paper>
                 <div className="col-sm-3">
 
                     <Paper style={{height:'80vh'}}>
-                         <DrawingControl />
+                         
                         Current Type: {this.props.drinkStore.currentMainDrink}
                         {this.state.step === "second"?this.listSecondRecipe():null}
                         {this.state.step === "third"?this.listThirdRecipe():null}
                     </Paper>
                 </div>
                  {(this.props.drinkStore.listMainDrink.length <= 0) ?this.waitingProgress():this.chooseMainTypeModal()} 
-                  <input type="hidden" id="patternTop"
-                  onClick = {(e) => this.handleChangeRecommend('x', e)} />
-                  <input type="hidden" id="patternLeft"
-                  onClick = {(e) => this.handleChangeRecommend('y', e)} />
-                    <input type="hidden" id="patternScale"
-                  onClick = {(e) => this.handleChangeRecommend('scale', e)} />
-                  <input type="hidden" id="patternAngle"
-                  onClick = {(e) => this.handleChangeRecommend('rotate', e)} />
+                  
                   <input type="hidden" id="screenShotUrl"
                   onClick = {(e) => this.submitAfterHavePreview(e)} />
-
+                   
+                  
             </div>
         );
     }

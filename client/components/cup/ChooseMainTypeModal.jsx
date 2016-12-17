@@ -16,9 +16,13 @@ class ChooseMainTypeModal extends React.Component{
          this.closeDialog = this.closeDialog.bind(this);
          this.drinkItem = this.drinkItem.bind(this);
     }
-    chooseMainType(type){
+    chooseMainType(type,url){
       this.props.goSecondStep(type);
       this.props.changeMainType(type);
+      document.getElementById('handleIngredientPattern').value = url;
+      document.getElementById('handleIngredientPattern').click("1");
+      document.getElementById('handleIngredientPattern').click("2");
+      document.getElementById('handleIngredientPattern').click("3");
       this.closeDialog();
     }
     closeDialog(){
@@ -31,7 +35,7 @@ class ChooseMainTypeModal extends React.Component{
     		<z key= {drink._id}>
     		 	<z className="col-sm-3">{drink.type}</z>  
 	           	<z className="col-sm-3">
-	            <img className="img-responsive" onClick={() => this.chooseMainType(drink.type)} src={hostServer +drink.typeIcon} />
+	            <img className="img-responsive" onClick={() => this.chooseMainType(drink.type,drink.typeImg)} src={hostServer +drink.typeIcon} />
 	          	</z> 
 	            <z className="col-sm-3">{drink.price} $</z> 
     		</z>

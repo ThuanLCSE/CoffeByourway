@@ -46,10 +46,12 @@ class Home extends React.Component{
   CustomCup(){
       return(
           <CustomCup addSecondRecipe={this.props.CustomerAct.addSecondRecipe}
+          addThirdRecipe={this.props.CustomerAct.addThirdRecipe}
                     changeMainType = {this.props.CustomerAct.changeMainType}
                      getFirstStepCustomData = {this.props.CustomerAct.getFirstStepCustomData}
                      getListSecondRecipe= {this.props.CustomerAct.getListSecondRecipe}
                     getListThirdRecipe= {this.props.CustomerAct.getListThirdRecipe}
+                    customCup = {this.props.CustomCupStore}
                     drinkStore = {this.props.DrinkStore} />
       )
   }

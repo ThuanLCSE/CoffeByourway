@@ -29,6 +29,7 @@ class CanvasEditor extends React.Component {
 
         this.colorCheckList = this.colorCheckList.bind(this);
         this.colorControl = this.colorControl.bind(this);
+        this.colorItem = this.colorItem.bind(this);
 
         this.widthControl = this.widthControl.bind(this);
 
@@ -42,7 +43,7 @@ class CanvasEditor extends React.Component {
 
 
        return (
-                    <button className="colorPicker" key = {color.key}
+                    <button className="colorPicker" key = {color.key} onClick = {() => this.props.customPattern()}
                               style = {colorPick} >
                     </button>
         )

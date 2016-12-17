@@ -1,6 +1,6 @@
 var canvas = null;
 var tshirts = new Array(); //prototype: [{style:'x',color:'white',front:'a',back:'b',price:{tshirt:'12.95',frontPrint:'4.99',backPrint:'4.99',total:'22.47'}}]
-
+var host = 'http://169.254.148.213:3013/'
 var line1;
 var line2;
 var line3;
@@ -16,6 +16,12 @@ var applyColor = function(){
 		   document.getElementById("shirtDiv").style.backgroundColor = color;
 	   });
 	 // document.getElementsByClassName('color-preview')[0].click();
+}
+var changePatternDiv = function(url,index){
+	setTimeout(function() {
+
+	 $('#level'+ index)[0].style.backgroundImage = 'url('+ host + url.replace("\\", "/")+')';
+	},500);
 }
 var setPatternIntoCanvas = function(patternId,left, top, scale){
 	$('#' + patternId).click(function(e){
@@ -79,14 +85,14 @@ var applyCanvasAndIngrident = function() {
 
 				  },
 				  'object:modified': function(e) {
-				  	$('#patternTop')[0].value = e.target.getTop();
-				    $('#patternLeft')[0].value = e.target.getLeft();
-				    $('#patternScale')[0].value = e.target.getScaleX();
-				    $('#patternAngle')[0].value = e.target.getAngle();
-				    $('#patternAngle').trigger("click");
-				    $('#patternTop').trigger("click");
-				    $('#patternLeft').trigger("click");
-			      $('#patternScale').trigger("click");
+				  	// $('#patternTop')[0].value = e.target.getTop();
+				   //  $('#patternLeft')[0].value = e.target.getLeft();
+				   //  $('#patternScale')[0].value = e.target.getScaleX();
+				   //  $('#patternAngle')[0].value = e.target.getAngle();
+				   //   $('#patternAngle').trigger("click");
+				   //  $('#patternTop').trigger("click");
+				   //  $('#patternLeft').trigger("click");
+			    //     $('#patternScale').trigger("click");
 
 				    e.target.opacity = 1;
 				  },
@@ -133,8 +139,7 @@ var applyCanvasAndIngrident = function() {
 			    }
 		  	};
 	 	}
-
-	   $(".clearfix button,a").tooltip();
+ 
 
  	// 	canvas.on('object:over', function(e) {
 		// });
@@ -194,6 +199,11 @@ var applyCanvasAndIngrident = function() {
   applyColorChange.click = function(){
 	  	applyColor();
  	}
+ var handleIngredientPattern = document.getElementById('handleIngredientPattern');
+   handleIngredientPattern.dispatchEvent(colorEvent);
+   handleIngredientPattern.click = function(index){
+	  	changePatternDiv(this.value,index);
+ 	}
 
   //html2canvas
    $( "#screenShot" ).click(function() {
@@ -209,7 +219,7 @@ var applyCanvasAndIngrident = function() {
 
 								var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
 									$.ajax({
-											url: 'http://localhost:3013/api/upload64',
+											url: host+'api/upload64',
 											type: 'post',
 											headers: {
 											},
@@ -231,25 +241,4 @@ var applyCanvasAndIngrident = function() {
 				useCORS: true
 			});
 });
-		// 	.then(function(shotPicture) {
-		//     var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
-		//     $.ajax({
-		//         url: 'http://192.168.2.193/api/upload64',
-		//         type: 'post',
-		//         headers: {
-		//         },
-		//         data: {
-		//             image: dataURL
-		//         },
-		//         dataType: 'json',
-    //             xhrFields: {
-	  //               withCredentials: true
-	  //           },
-	  //           crossDomain: true,
-		//         success: function(response) {
-		//
-		//         	$('#screenShotUrl')[0].value = response.pictureUrl;
-		// 		    $('#screenShotUrl').trigger("click");
-		//         }
-		// });
- 	// 	});
+		 

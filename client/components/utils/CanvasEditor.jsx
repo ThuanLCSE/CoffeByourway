@@ -87,48 +87,47 @@ class CanvasEditor extends React.Component {
         }
 
 
-
+        let dividedDiv  = {
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          height:this.state.cup.height,
+          width:this.state.canvas.width/2
+        }
 
         return(
               <div id="cupShot" className="page" style={cupShot}>
-                <img src={hostServer +  "static/PaperCupDrinkPlatform.png"} style={cupLayout}></img>
-                <div style={{position: 'absolute', top:this.state.cup.bot, right: 0}}>
-                        <div
-                          style = {{
-                            height:this.state.cup.height,
-                            width:this.state.canvas.width/2
-                          }}
+              {this.props.custom === 'ingredient'? 
+              <z>
+              <img src={hostServer +  "static/PaperCupDrinkPlatform.png"} style={cupLayout}></img>
+              
+              </z>
+              :<img src={hostServer +  "static/PaperCupPatternPlatform.png"} style={cupLayout}></img>}
+                 <div style={{display: this.props.custom==='ingredient'?'block':'none', position: 'absolute', top:this.state.cup.bot, right: 0}}>
+                        <div id="level4"
+                          style = {dividedDiv}
                         >
                         </div>
-                        <div
-                          style = {{
-                            height:this.state.cup.height,
-                            width:this.state.canvas.width/2
-                          }}
+                        <div id="level3"
+                          style = {dividedDiv}
                         >
                         </div>
-                        <div
-                          style = {{
-                            height:this.state.cup.height,
-                            width:this.state.canvas.width/2
-                          }}
+                        <div id="level2"
+                         style = {dividedDiv}
                         >
                         </div>
-                        <div
-                          style = {{
-                            height:this.state.cup.height,
-                            width:this.state.canvas.width/2
-                          }}
+                        <div id="level1"
+                          style = {dividedDiv}
                         >
                         </div>
 
                   </div>
-
-
-
                     <div id="drawingArea" style={drawingAreae}>
-                      <img ref="cupPicture" src={hostServer +  "static/PaperCupDrinkLayOut.png"}
+                     {this.props.custom === 'ingredient'? 
+                     <img ref="cupPicture" src={hostServer +  "static/PaperCupDrinkLayOut.png"}
                       className = "cupLayout" style={platform}/>
+                     :<img ref="cupPicture" src={hostServer +  "static/PaperCupPatternLayOut.png"}
+                      className = "cupLayout" style={platform}/>}
+                      
                       <canvas id="cupCanvas"
                       height={this.state.canvas.height}
                       width={this.state.canvas.width}

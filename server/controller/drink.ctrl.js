@@ -41,17 +41,21 @@ exports.getAllMainType = function(req,res){
 };  
 
 exports.getSecondRecipeByType = function(req,res){
-	Drink.findOne({ 
+	Drink.find({ 
 		  	step: 'Second',
 		  	type: req.param('drinkType') 
-	  	 }, function (err, drink) {
+	  	 }, function (err, drinks) {
 		  if (err) {
 		  	res.status(400).send(err);
-		  } else if (drink === null) {
+		  } else if (drinks === null) {
 	 		res.status(400).send('not found second drink recipw');
 		  } else { 
+		  	var totalRecipe = []
+		  	for (var i in drinks){
+		  		totalRecipe = totalRecipe.concat(drinks[i].recipe);
+		  	}
 	  		res.status(200).send({
-			  		recipes: drink.recipe,
+			  		recipes: totalRecipe,
 			  		message: "get second recipe success",
 			  	});
 				
@@ -59,18 +63,22 @@ exports.getSecondRecipeByType = function(req,res){
 	  });
 }
 exports.getThirdRecipeByType = function(req,res){
-	Drink.findOne({ 
+	Drink.find({ 
 		  	step: 'Third',
 		  	type: req.param('drinkType') 
 	  	 }, function (err, drink) {
 		  if (err) {
 		  	res.status(400).send(err);
 		  } else if (drink === null) {
-	 		res.status(400).send('not found second drink recipw');
+	 		res.status(400).send('not found thired drink recipw');
 		  } else { 
+		  	var totalRecipe = []
+		  	for (var i in drink){
+		  		totalRecipe = totalRecipe.concat(drink[i].recipe);
+		  	}
 	  		res.status(200).send({
-			  		recipes: drink.recipe,
-			  		message: "get second recipe success",
+			  		recipes: totalRecipe,
+			  		message: "get third recipe success",
 			  	});
 				
 		  }
