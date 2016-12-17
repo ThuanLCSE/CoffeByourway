@@ -1,10 +1,14 @@
-import React from 'react';   
+import React from 'react';
+
+
+import  HomePage from './home/HomePage.jsx';
+import * as CustomerAct from './../actions/CustomerAction.jsx';
+
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'; 
-
-import Welcome from './home/Welcome.jsx';  
-import * as CustomerAct from './../actions/CustomerAction.jsx';  
+import { bindActionCreators } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 class Home extends React.Component{
     constructor(props) {
@@ -12,35 +16,37 @@ class Home extends React.Component{
         this.state = {
             view: 'home'
         };
-        this.changeStateView = this.changeStateView.bind(this); 
-    }   
+        this.changeStateView = this.changeStateView.bind(this);
+    }
     changeStateView(page){ 
         this.setState({
             view : page
         });
     }
-   	homeView(){
-   		return(
-   				<Welcome/>
-   			)
-   	}
-  	  render(){
-  	    return(
 
-  	      <z> 
-  	        {this.state.view === 'home'?this.homeView():null} 
-  	      </z>
-  	    );
-  	  }
+
+ 	homeView(){
+ 		return(
+ 				<HomePage />
+ 			)
+ 	}
+	  render(){
+	    return(
+
+	      <z>
+	        {this.state.view === 'home'?this.homeView():null}
+	      </z>
+	    );
+	  }
 }
 
-const mapStateToProps = state => ({ 
-    CustomerStore: state.CustomerStore,
+const mapStateToProps = state => ({
+  CustomerStore: state.CustomerStore,
 	DrinkStore: state.DrinkStore,
 	CustomCupStore: state.CustomCupStore
 });
 
-const mapDispatchToProps = dispatch => ({ 
+const mapDispatchToProps = dispatch => ({
   CustomerAct: bindActionCreators(CustomerAct, dispatch),
 });
 
