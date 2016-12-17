@@ -21,7 +21,8 @@ class  Ingredient extends React.Component{
                                   clearMessage = {this.props.clearMessage}
                                   managerStore = {this.props.managerStore}/>
                 <ListIngredient getListIngredient = {this.props.getListIngredient}
-                                listIngredient = {this.props.listIngredient}/>
+                                listIngredient = {this.props.listIngredient}
+                                removeIngredient = {this.props.removeIngredient}/>
             </Paper>
         );
     }

@@ -1,18 +1,19 @@
 import React from 'react'; 
-import IngredientItem from './IngredientItem.jsx'; 
+import DrinkItem from './DrinkItem.jsx'; 
 
 
 class ListIngredient extends React.Component{
     componentWillMount(){
-      this.props.getListIngredient();
+      this.props.getListMainDrink();
     }
     render(){
       return (
         <div>
           <table className="table table-bordered">
            <thead>
-             <tr>
+             <tr> 
                <th>Type name</th>
+                <th>Step kind</th>
                <th>Img</th>
                <th>Icon</th>
                <th>Price</th> 
@@ -20,11 +21,11 @@ class ListIngredient extends React.Component{
              </tr>
            </thead>
            <tbody>
-            {this.props.listIngredient.map(ingredient =>
-                 <IngredientItem 
-                  key = {ingredient._id}
-                  ingredient = {ingredient} 
-                  tickIngredient = {this.props.tickIngredient} />
+            {this.props.listMainDrink.map(drink =>
+                 <DrinkItem 
+                  key = {drink._id}
+                  drink = {drink} 
+                  chooseDrinkType = {this.props.chooseDrinkType}/>
               )
             }
            </tbody>

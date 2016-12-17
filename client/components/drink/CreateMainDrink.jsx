@@ -1,7 +1,6 @@
 
 import React from 'react';  
 
-import DialogMessage from './../utils/DialogMessage'; 
 import UploadImg from './../utils/UploadImg'; 
 
 class CreateIngredient extends React.Component{
@@ -14,22 +13,21 @@ class CreateIngredient extends React.Component{
                 img: '',
                 icon: ''
             }, 
+          
             error: ''
         };
         this.submitMainDrink = this.submitMainDrink.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onUrlChange = this.onUrlChange.bind(this);
         this.onIconChange = this.onIconChange.bind(this);
-        this.createSecondRecipe = this.createSecondRecipe.bind(this);
-
-
+   
     }
 
 
     submitMainDrink() {
    
-     var newMainDrink = this.state.drink;
-       this.props.createMainDrinkType(newMainDrink); 
+      var newMainDrink = this.state.drink;
+      this.props.createMainDrinkType(newMainDrink); 
     }
 
     handleChange(att, e) {
@@ -55,13 +53,7 @@ class CreateIngredient extends React.Component{
       }
       this.handleChange('icon',fakeEvent)
     }
-    createSecondRecipe(){
-       return(
-          <div>
-            {this.state.drink.type}
-          </div>
-        )
-    }
+   
 
     render(){
         return (
@@ -83,9 +75,8 @@ class CreateIngredient extends React.Component{
                onChange={(e) => this.handleChange('price', e)}  /> 
                <br/>
                <button onClick={this.submitMainDrink}>Create </button>
-               {this.createSecondRecipe()}
-               <DialogMessage closeMessage = {this.props.clearMessage}
-                              message= {this.props.managerStore.message}/>
+              
+           
             </div>
         );
     }

@@ -6,12 +6,16 @@ module.exports = function(app){
 	 
 	app.route('/api/mng/signIn')
 	.post(managerCtrl.signIn);
+	app.route('/api/mng/checkSignIn')
+	.get(managerCtrl.checkSignIn);
 	app.route('/api/mng/signUp')
 	.post(managerCtrl.checkEmailNotExist, managerCtrl.signUp);
 	app.route('/api/mng/signOut')
 	.get(managerCtrl.signOut);
 	app.route('/api/ingre/create')
 	.post(managerCtrl.checkManager,ingredientCtrl.create);
+	app.route('/api/ingre/remove')
+	.post(managerCtrl.checkManager,ingredientCtrl.remove);
 	app.route('/api/ingre/getAll')
 	.get(managerCtrl.checkManager,ingredientCtrl.getAll);
 

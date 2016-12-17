@@ -16,6 +16,7 @@ class HomePage extends React.Component{
 
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
+  this.signInModal = this.signInModal.bind(this);
   };
 
   handleOpen() {
@@ -25,6 +26,30 @@ class HomePage extends React.Component{
     this.setState({open: false});
   }
 
+signInModal(){
+    return(
+      <Dialog
+            title={(<p><b>Sign In</b></p>)}
+             modal={true}
+             open={this.state.open}
+             contentStyle={customContentStyle}
+             onRequestClose={this.handleClose}
+           >
+           <TextField  floatingLabelText="Your email"
+                           hintText="Your email"
+                           fullWidth={true}
+                        /><br/>
+            <TextField  type="password"
+                           floatingLabelText="Your password"
+                           hintText="Your password"
+                           fullWidth={true}
+                          /><br/>
+            <div style={{margin: 'auto', width: '80%'}}>
+               <RaisedButton label="Sign In" fullWidth={true} primary={true} onClick={this.handleClose}/>
+           </div>
+        </Dialog> 
+      )
+  }
 
   render(){
     let centerDiv = {
@@ -41,29 +66,12 @@ class HomePage extends React.Component{
     }
     let height100 = {
        height: '100%'
-    }
-    // const actions = [
-    //
-    //   <FlatButton
-    //     label="Cancel"
-    //     primary={true}
-    //     onTouchTap={this.handleClose}
-    //   />,
-    //   <FlatButton
-    //     label="Submit"
-    //     primary={true}
-    //     disabled={false}
-    //     keyboardFocused={true}
-    //     onTouchTap={this.handleClose}
-    //
-    //   />,
-    // ];
+    } 
     let customContentStyle = {
     width: '25%',
     maxWidth: 'none'
   };
-
-
+  
 
 
     return (
@@ -71,34 +79,14 @@ class HomePage extends React.Component{
         <div className = "row" style={height100}>
             <div className = "col-sm-6" style={centerDiv}>
               <div className = "col-sm-12" style={buttonDiv}>
-                <RaisedButton  label="Sign In"  primary={true} onTouchTap={this.handleOpen}/>
-                <Dialog
-                    title={(<p><b>Sign In</b></p>)}
-                     modal={true}
-                     open={this.state.open}
-                     contentStyle={customContentStyle}
-                     onRequestClose={this.handleClose}
-                   >
-                   <TextField  floatingLabelText="Your email"
-                                   hintText="Your email"
-                                   fullWidth={true}
-                                /><br/>
-                    <TextField  type="password"
-                                   floatingLabelText="Your password"
-                                   hintText="Your password"
-                                   fullWidth={true}
-                                  /><br/>
-                    <div style={{margin: 'auto', width: '80%'}}>
-                       <RaisedButton label="Sign In" fullWidth={true} primary={true} onClick={this.handleClose}/>
-                   </div>
-                </Dialog>
-
+                <RaisedButton  label="Sign In"  primary={true} onTouchTap={this.handleOpen}/> 
               </div>
               <div className = "col-sm-12">
                 <RaisedButton label="Order"  primary={true}/>
               </div>
             </div>
         </div>
+        {this.signInModal()}
       </div>
     );
   }

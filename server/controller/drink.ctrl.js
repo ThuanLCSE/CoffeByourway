@@ -28,7 +28,7 @@ exports.getAllMainType = function(req,res){
   	 }, function (err, drinks) {
 	  if (err) {
 	  	res.status(400).send(err);
-	  } else if (drink === null) {
+	  } else if (drinks === null) {
  		res.status(400).send('not found drinks');
 	  } else { 
   		res.status(200).send({

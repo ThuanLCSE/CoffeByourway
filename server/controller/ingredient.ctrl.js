@@ -19,6 +19,20 @@ exports.create = function(req,res){
 	  }
   });
 };
+exports.remove = function(req,res){
+	var ingredientId = req.body.ingredientId;
+
+  	Ingredient.findByIdAndRemove(ingredientId,
+  		function (err) {
+	 	 if (err ) {
+	  		res.status(400).send(err);
+	    } else { 
+		  	res.status(200).send({
+		  		message: 'remove ingredient success' 
+		  	}); 
+	  	}
+ 	});
+};
 
 exports.getAll = function(req,res){ 
   	Ingredient.find({}, function (err, ingredients) {

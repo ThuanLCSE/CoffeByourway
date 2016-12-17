@@ -22,6 +22,22 @@ export function signIn(data) {
 		});
 	};
 } 
+export function checkSignIn() {  
+    return function (dispatch) {
+	  	return restApi.get(api.checkSignIn).then((response) => { 
+	       dispatch({ type: actType.managerAuthSuccess,
+                     manager : response.manager}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ 
+	        		type: actType.managerActionFail,
+	        		message: ''
+                    });
+		});
+	};
+} 
+
 export function signUp(data) { 
 	var signUpdata = {
 		email: data.email,
@@ -49,6 +65,28 @@ export function clearMessage() {
             }
                    
 } 
+
+export function removeIngredient(ingreId) {
+	
+	// listAllIngredient
+	var data = {
+		ingredientId: ingreId
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.removeIngredient,data).then((response) => {
+	    	
+	       dispatch({ type: actType.removeIngredientSuccess,
+                     	ingredientId : ingreId,
+                    	message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
 export function createIngredient(data) {
 	
 	// listAllIngredient
@@ -162,3 +200,25 @@ export function getListIngredient() {
 		});
 	};
 }
+export function getListMainDrink() { 
+    return function (dispatch) {
+	  	return restApi.get(api.getAllMainType).then((response) => { 
+	       dispatch({ type: actType.getMainTypeSuccess,
+                    listMainDrink : response.listDrink,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+export function changeMainType(type) { 
+    return { 
+    			type: actType.changeMainDrink,
+    			drinkType: type
+            }
+                   
+} 

@@ -89,3 +89,33 @@ exports.checkManager = function(req,res,next){
 	}
 	
 };
+exports.checkSignIn = function(req,res,next){ 
+	if (!req.session.manager){
+		res.status(400).send({
+	  		message: 'not sign in ' 
+	  	});
+	} else {
+		Manager.findOne({ 
+	  		active: true,
+	  		email: req.session.manager.email
+	  	}, function (err, manager) {
+			if (err) {
+			  	res.status(400).send(err);
+			} else if (manager === null) {
+	 		res.status(400).send('wrong email or password');
+		  } else {
+		  	 
+			req.session.manager = { 
+				email: manager.email,
+				manangerId: manager._id
+			};
+	  		res.status(200).send({
+			  		manager:manager,
+			  		message: "sign in as manager success",
+			  	});
+				
+			}
+		});
+	}
+	
+};

@@ -1,9 +1,9 @@
 
 import React from 'react';  
 
-import ListIngredient from './../drink/ListIngredient';  
+import ListIngredient from './../ingredient/ListIngredient';  
 
-class CreateIngredient extends React.Component{
+class CreateSecondRecipe extends React.Component{
    constructor(props){
         super(props);
         this.state = {  
@@ -11,34 +11,49 @@ class CreateIngredient extends React.Component{
             recipe: [],
             error: ''
         };
-        this.submitSecondRecipe = this.submitSecondRecipe.bind(this);
-        this.changeRecipe = this.changeRecipe.bind(this);
-        this.onUrlChange = this.onUrlChange.bind(this);
-        this.onIconChange = this.onIconChange.bind(this);
+        this.submitSecondRecipe = this.submitSecondRecipe.bind(this);   
+        this.tickIngredient = this.tickIngredient.bind(this);
 
     } 
   componentWillMount(){
       this.props.getListIngredient();
     }
     submitSecondRecipe() { 
-    	var newSeconDrinkType = this.state.drink;
+    	var newSeconDrinkType = this.state;
         this.props.createSecondDrinkType(newSeconDrinkType); 
     }
-
-    changeRecipe(e,isChecked, ingredient) {
+    tickIngredient(isChecked, ingredient)  {
 
 	    var newRecipe = this.state.recipe;
-	     
+	    if (isChecked){
+	    	newRecipe.push(ingredient);
+	    } else  if (!isChecked){
+			for (var i in newRecipe){
+		    	if (newRecipe[i]._id === ingredient._id){
+		    		newRecipe.splice(i,1);
+		    	}
+		    }
+	    }
+	    this.setState({
+	    	recipe: newRecipe
+	    })
+	    
+	    
 	}
    
 
     render(){
         return (
             <div>
-             	<ListIngredient listIngredient = {this.props.listIngredient}/>
+             	<ListIngredient getListIngredient = {this.props.getListIngredient}
+                                listIngredient = {this.props.listIngredient}
+             					tickIngredient = {this.tickIngredient}/>
+             	<button onClick={() => this.submitSecondRecipe()}>
+             	Approve second type recipe for {this.props.mainDrinkType}
+             	</button>
             </div>
         );
     }
 };
 
-export default CreateIngredient;
+export default CreateSecondRecipe;

@@ -22,6 +22,6 @@ export default function CustomCup(state = defaultState, action) {
    		newState.message = ''; 
          return newState;
     default:
-      return state;
+      return newState;
   }
 }

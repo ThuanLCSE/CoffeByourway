@@ -1,0 +1,11 @@
+#MnHomePage {
+    background-image:url(managerbg.jpg);
+    background-size:cover;
+    height: 100vh;
+}
+#MnSignInUp {
+    height: 100vh;
+}
+.UploadImg {
+    width: 33%;
+}

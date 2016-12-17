@@ -1,6 +1,10 @@
 import * as actType from '../constant/ActionTypes';
 var defaultState = { 
-	drink: {}
+	drink: {},
+  listMainDrink: [],
+  listSecondRecipe: [],
+  listThirdRecipe: [],
+  currentMainDrink: null
 }
 
 export default function CustomCup(state = defaultState, action) {
@@ -9,11 +13,24 @@ export default function CustomCup(state = defaultState, action) {
   switch (action.type) { 
     case actType.createMainDrinkSuccess:
         newState.drink = action.drink; 
-
+        newState.currentMainDrink = action.drink.type;
+return newState;
     case actType.createSecondRecipeSuccess: 
-         newState.drink = action.drink;  
-      case actType.createThirdRecipeSuccess: 
-         newState.drink = action.drink;  
+      newState.listSecondRecipe.push(action.drink);
+       newState.drink = action.drink;  
+return newState;
+    case actType.createThirdRecipeSuccess: 
+     newState.listThirdRecipe.push(action.drink);
+       newState.drink = action.drink;  
+       return newState;
+    case actType.getMainTypeSuccess:
+          newState.listMainDrink = action.listMainDrink;  
+          return newState;
+    case actType.changeMainDrink: 
+      newState.currentMainDrink = action.drinkType; 
+  return newState;
+    default:
+      return newState;
   }
-  return state;
+  
 }
