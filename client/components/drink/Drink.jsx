@@ -1,17 +1,19 @@
 
-import React from 'react';  
+import React from 'react';
 
-import DialogMessage from './../utils/DialogMessage'; 
-import CreateMainDrink from './CreateMainDrink'; 
-import CreateSecondRecipe from './CreateSecondRecipe'; 
-import CreateThirdRecipe from './CreateThirdRecipe'; 
-import ListMainDrink from './ListMainDrink'; 
+import DialogMessage from './../utils/DialogMessage';
+import CreateMainDrink from './CreateMainDrink';
+import CreateSecondRecipe from './CreateSecondRecipe';
+import CreateThirdRecipe from './CreateThirdRecipe';
+import ListMainDrink from './ListMainDrink';
+
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class  Drink extends React.Component{
    constructor(props){
         super(props);
-        this.state = {  
+        this.state = {
         	createNewMainType: false
         };
         this.createSecondRecipe = this.createSecondRecipe.bind(this);
@@ -22,12 +24,12 @@ class  Drink extends React.Component{
     	this.setState({
     		createNewMainType : true
     	});
-    } 
+    }
      createMainType(){
        return(
           <div>
-            Choose existed type Or 
-            <button onClick={this.openCreateNewMain}>Create new </button>
+            Choose existed type Or
+            <RaisedButton onClick={this.openCreateNewMain} label="Create New" primary={true}/>
             {this.state.createNewMainType?
             	<CreateMainDrink createMainDrinkType = {this.props.createMainDrinkType} />:
 				<ListMainDrink getListMainDrink = {this.props.getListMainDrink}
@@ -39,7 +41,7 @@ class  Drink extends React.Component{
      createSecondRecipe(){
        return(
           <div>
-          Second Recipe Type 
+          Second Recipe Type
           <CreateSecondRecipe  getListIngredient = {this.props.getListIngredient}
 								createSecondDrinkType= {this.props.createSecondDrinkType}
 								listIngredient= {this.props.listIngredient}
@@ -51,7 +53,7 @@ class  Drink extends React.Component{
     createThirdRecipe(){
        return(
           <div>
-           Third Recipe Type 
+           Third Recipe Type
           <CreateThirdRecipe  getListIngredient = {this.props.getListIngredient}
 								createThirdDrinkType= {this.props.createThirdDrinkType}
 								listIngredient= {this.props.listIngredient}
@@ -65,7 +67,7 @@ class  Drink extends React.Component{
             <div>
             	{this.createMainType()}
                 {this.props.drinkStore.currentMainDrink?this.createSecondRecipe():null}
-                {this.props.drinkStore.currentMainDrink?this.createThirdRecipe():null} 
+                {this.props.drinkStore.currentMainDrink?this.createThirdRecipe():null}
                     <DialogMessage closeMessage = {this.props.clearMessage}
                               message= {this.props.managerStore.message}/>
             </div>

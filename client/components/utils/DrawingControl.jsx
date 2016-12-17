@@ -65,7 +65,7 @@ class CanvasEditor extends React.Component {
     }
 
 
-  
+
 
     widthControl(){
         return(
@@ -79,8 +79,8 @@ class CanvasEditor extends React.Component {
         return (
            <div>
            		{this.colorControl()}
-
               {this.widthControl()}
+              <button id = "clear">Clear</button>
            </div>
         );
 

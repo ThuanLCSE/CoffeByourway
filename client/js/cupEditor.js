@@ -113,9 +113,9 @@ var applyCanvasAndIngrident = function() {
 
 			$('#drawWidth')[0].onchange = function() {
 		    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
-		  
-  		};
 
+  		};
+			clearEl.onclick = function() { canvas.clear() };
 
 
 			// $(".colorPicker").click(function(e){

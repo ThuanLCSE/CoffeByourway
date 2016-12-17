@@ -1,11 +1,12 @@
-import React from 'react'; 
+import React from 'react';
 import {hostServer} from './../../constant/ApiUri';
+import RaisedButton from 'material-ui/RaisedButton'
 
 
 class ingredientItem extends React.Component{
   constructor(props){
 
-    super(props); 
+    super(props);
     this.state = {
       level: 1
     }
@@ -34,32 +35,38 @@ class ingredientItem extends React.Component{
     return (
       <div>
           <input type="text" value={this.state.level} onChange={this.handleLevel}/>
-          <button  onClick={() => this.removeIngredient(ingredientId)}>
-          Remove </button>
+          <RaisedButton  onClick={() => this.removeIngredient(ingredientId)}
+          Remove
+          />
       </div>
       )
   }
-      
+
   checkbox(ingredient){
     return (
           <Checkbox  onCheck={(e,isChecked, code) => this.checkIngredient(e, isChecked,ingredient)}/>
       )
   }
-  render(){ 
+  render(){
       return (
         <tr>
           <td className="col-sm-3">{this.props.ingredient.type}</td>
           <td className="col-sm-3">
-            <img className="img-responsive" src={hostServer +this.props.ingredient.img} />
-          </td> 
+            <img className="img-responsive" src={hostServer +this.props.ingredient.img}
+            style={{height: '80px', width: '80%'}}
+
+            />
+          </td>
            <td className="col-sm-3">
-            <img className="img-responsive" src={hostServer +this.props.ingredient.icon} />
-          </td> 
+            <img className="img-responsive" src={hostServer +this.props.ingredient.icon}
+              style={{height:'40px', width: '40px'}}
+            />
+          </td>
             <td className="col-sm-3">{this.props.ingredient.price} $</td>
            <td>
               {this.props.tickIngredient?this.checkbox(this.props.ingredient):null}
               {this.props.removeIngredient?this.removeButton(this.props.ingredient._id):null}
-               
+
            </td>
         </tr>
       );
