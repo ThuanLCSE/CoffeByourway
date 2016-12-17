@@ -16,7 +16,6 @@ class HomePage extends React.Component{
 
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
-  this.signInModal = this.signInModal.bind(this);
   };
 
   handleOpen() {
@@ -25,6 +24,10 @@ class HomePage extends React.Component{
   handleClose() {
     this.setState({open: false});
   }
+  handleChoosePopover(e, view) {
+       this.props.changeView(view);
+       this.setState({open: false});
+   }
 
 signInModal(){
     let customContentStyle = {
@@ -56,6 +59,7 @@ signInModal(){
       )
   }
 
+
   render(){
     let fullHeight = {
         height: '100vh'
@@ -63,17 +67,47 @@ signInModal(){
     let height100 = {
        height: '100%'
     }
+    // const actions = [
+    //
+    //   <FlatButton
+    //     label="Cancel"
+    //     primary={true}
+    //     onTouchTap={this.handleClose}
+    //   />,
+    //   <FlatButton
+    //     label="Submit"
+    //     primary={true}
+    //     disabled={false}
+    //     keyboardFocused={true}
+    //     onTouchTap={this.handleClose}
+    //
+    //   />,
+    // ];
+    let customContentStyle = {
+    width: '25%',
+    maxWidth: 'none'
+  };
+
+    let bodyHome = {
+
+          background: "url('static/coffee.jpg') no-repeat  center center fixed",
+
+           backgroundSize: 'cover'
+
+    }
 
     return (
-      <div className = "container-fluid" style={fullHeight}>
+      <div className = "container-fluid" style={bodyHome}>
         <div className = "row" style={height100}>
-            <div className = "col-sm-6"></div>
-            <div className = "col-sm-6" style={{overflow:'hidden'}}>
+            <div className = "col-sm-6" style={centerDiv}>
+              <div className = "col-sm-12" style={buttonDiv}>
                 <img className = "TextCover" src="static/MyCollection.png" onClick={this.handleOpen}/>
                 <img className = "TextCover" src="static/CoffeeNow.png"/>
+              <div className = "col-sm-12">
+                <RaisedButton label="Order"  primary={true}  onClick={(e, view) => this.handleChoosePopover(e, 'customCup')} />
+              </div>
             </div>
         </div>
-        {this.signInModal()}
       </div>
     );
   }
