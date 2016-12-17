@@ -16,7 +16,7 @@ export function signIn(data) {
                    );
 	    }).catch((err) => {
 	    	console.log(err);
-	        dispatch({ type: actType.managerAuthFail,
+	        dispatch({ type: actType.managerActionFail,
                      message: err.responseText
                     });
 		});
@@ -37,7 +37,7 @@ export function signUp(data) {
                    );
 	    }).catch((err) => {
 	    	console.log(err);
-	        dispatch({ type: actType.managerAuthFail,
+	        dispatch({ type: actType.managerActionFail,
                      message: err.responseText
                     });
 		});
@@ -52,21 +52,36 @@ export function clearMessage() {
 export function createIngredient(data) {
 	
 	// listAllIngredient
-	var signUpdata = {
-		email: data.email,
-		password: data.password,
-		fullName : data.fullName
+	var newIngredient = {
+		type: data.type,
+		img: data.img,
+		price : data.price
 	}
     return function (dispatch) {
-	  	return restApi.post(api.createIngredient,signUpdata).then((response) => {
+	  	return restApi.post(api.createIngredient,newIngredient).then((response) => {
 	    	
-	       dispatch({ type: actType.managerAuthSuccess,
-                     manager : response.manager,
+	       dispatch({ type: actType.createIngredientSuccess,
+                     ingredient : response.ingredient,
                     message: response.message}
                    );
 	    }).catch((err) => {
 	    	console.log(err);
-	        dispatch({ type: actType.managerAuthFail,
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+export function getListIngredient() { 
+    return function (dispatch) {
+	  	return restApi.get(api.listAllIngredient).then((response) => { 
+	       dispatch({ type: actType.getListIngredientSuccess,
+                     listIngredient : response.listIngredient,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
                      message: err.responseText
                     });
 		});

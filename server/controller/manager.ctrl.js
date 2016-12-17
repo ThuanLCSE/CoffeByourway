@@ -17,7 +17,7 @@ exports.signIn = function(req,res){
 	  	 
 		req.session.manager = { 
 			email: manager.email,
-			manangerId: mananger._id
+			manangerId: manager._id
 		};
   		res.status(200).send({
 		  		manager:manager,

@@ -9,7 +9,7 @@ module.exports = function(app){
 	app.route('/api/mng/signOut')
 	.get(managerCtrl.signOut);
 	app.route('/api/ingre/create')
-	.get(managerCtrl.checkManager,ingredientCtrl.create);
+	.post(managerCtrl.checkManager,ingredientCtrl.create);
 	app.route('/api/ingre/getAll')
 	.get(managerCtrl.checkManager,ingredientCtrl.getAll);
 	

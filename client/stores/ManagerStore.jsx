@@ -1,6 +1,7 @@
 import * as actType from '../constant/ActionTypes';
 var defaultState = { 
 	manager: {},
+  authenticated: false,
 	message: ''
 }
 
@@ -11,10 +12,10 @@ export default function CustomCup(state = defaultState, action) {
 
     case actType.managerAuthSuccess:
           newState.manager = action.manager;
-          newState.message = action.message; 
+          newState.authenticated = true; 
           return newState;
           
-    case actType.managerAuthFail:
+    case actType.managerActionFail:
           newState.message = action.message; 
           return newState;
    	case actType.managerClearMessage:
