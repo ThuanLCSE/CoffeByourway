@@ -4,7 +4,8 @@
   "description": "ahi hi customize your coffee cup and take selfie",
   "main": "server.js",
   "scripts": {
-    "test": "funyyyy"
+    "start": "gulp server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
    "repository": {
     "type": "git",

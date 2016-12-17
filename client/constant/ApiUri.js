@@ -1,0 +1,1 @@
+export const hostServer = 'http://192.168.3.169:3013'
