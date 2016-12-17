@@ -90,20 +90,19 @@ signInModal(){
 
     let bodyHome = {
 
-          background: "url('static/coffee.jpg') no-repeat  center center fixed",
+          background: "url('static/coffee.jpg') no-repeat  center center fixed", 
+           backgroundSize: 'cover',
 
-           backgroundSize: 'cover'
 
     }
 
     return (
       <div className = "container-fluid" style={bodyHome}>
         <div className = "row" style={height100}>
-            <div className = "col-sm-6" style={centerDiv}>
-              <div className = "col-sm-12" style={buttonDiv}>
+            <div className = "col-sm-6">
+              <div className = "col-sm-12" >
                 <img className = "TextCover" src="static/MyCollection.png" onClick={this.handleOpen}/>
-                <img className = "TextCover" src="static/CoffeeNow.png"/>
-              <div className = "col-sm-12">
+                <img className = "TextCover" src="static/CoffeeNow.png"/> 
                 <RaisedButton label="Order"  primary={true}  onClick={(e, view) => this.handleChoosePopover(e, 'customCup')} />
               </div>
             </div>

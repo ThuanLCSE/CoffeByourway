@@ -7,8 +7,8 @@ class CanvasEditor extends React.Component {
         super(props); 
         this.state = {           
             canvas: {
-              height: 100,
-              width: 100
+              height: 200,
+              width: 200
             }  
         };
       
@@ -16,7 +16,11 @@ class CanvasEditor extends React.Component {
 
     } 
     componentDidMount() { 
-	  
+        var mountedCanvas = this.state.canvas; 
+        // document.getElementById('cupPicture')
+        mountedCanvas.width = this.refs.cupPicture.clientWidth;
+        mountedCanvas.height = mountedCanvas.width * 3/2;
+        this.setState({ canvas: mountedCanvas });
     }
     canvasControl(){
         let styleAlignCenter = {
@@ -52,12 +56,12 @@ class CanvasEditor extends React.Component {
           height: '100%',
           WebkitUserSelect : 'none'
         }
-        let shirtDiv = {
+        let cupShot = {
             width: '100%',
 
             position: 'relative'
         }
-        let shirtFacing = { 
+        let cupLayout = { 
             width: '100%',
             height: '100%'
         }
@@ -71,18 +75,25 @@ class CanvasEditor extends React.Component {
 
         }
 
+console.dir(this.state.canvas);
+      // if(this.state.canvas.width === 200) {
+      //   return <div>loading....</div>
+      // } else {
         return(
-              <div id="shirtDiv" className="page" style={shirtDiv}>
-                <img src={hostServer + '/' + "static/platform.png"} style={shirtFacing}></img>
+              <div id="cupShot" className="page" style={cupShot}>
+                <img src={hostServer +  "static/PaperCupPatternPlatform.png"} style={cupLayout}></img>
                 <div id="drawingArea" style={drawingAreae}>
-                  <img id="tshirtFacing" className = "shirtLayout" style={platform}/>
-                  <canvas id="shirtCanvas" height={this.state.canvas.height}
+                  <img ref="cupPicture" src={hostServer +  "static/PaperCupPatternLayOut.png"} 
+                  className = "cupLayout" style={platform}/>
+                  <canvas id="cupCanvas" 
+                  height={this.state.canvas.height}
                   width={this.state.canvas.width}
                    className="hover" style={webKitUser}>
                   </canvas>
                 </div>
               </div>
         )
+      // }
     }
     render() { 
         return (
