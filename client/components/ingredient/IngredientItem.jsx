@@ -1,10 +1,7 @@
 import React from 'react';
 import {hostServer} from './../../constant/ApiUri';
 import RaisedButton from 'material-ui/RaisedButton'
-import Checkbox from 'material-ui/Checkbox';
-
-import RaisedButton from 'material-ui/RaisedButton';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from 'material-ui/Checkbox'; 
 
 
 class ingredientItem extends React.Component{

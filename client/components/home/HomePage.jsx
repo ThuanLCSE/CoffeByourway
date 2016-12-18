@@ -97,16 +97,18 @@ signInModal(){
     }
 
     return (
-      <div className = "container-fluid" style={bodyHome}>
-        <div className = "row" style={height100}>
-            <div className = "col-sm-6">
-              <div className = "col-sm-12" >
-                <img className = "TextCover" src="static/MyCollection.png" onClick={this.handleOpen}/>
-                <img className = "TextCover" src="static/CoffeeNow.png"/> 
-                <RaisedButton label="Order"  primary={true}  onClick={(e, view) => this.handleChoosePopover(e, 'customCup')} />
-              </div>
-            </div>
-        </div>
+      <div>
+        <div className="header">
+          COFFEE YOUR WAY
+          </div>
+          <div className="custombutton pull-right">
+          MY COLLECTION
+          </div>
+
+          <div className="custombutton"  onClick={(e, view) => this.handleChoosePopover(e, 'customCup')} 
+          style={{borderRight:'1px solid gray'}} >
+          MAKE YOUR DRINK
+          </div> 
       </div>
     );
   }

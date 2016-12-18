@@ -1,7 +1,7 @@
 import React from 'react'; 
- 
-import Dialog from 'material-ui/Dialog';
+ import { Modal, Button } from 'react-bootstrap'; 
 import {hostServer} from './../../constant/ApiUri';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 
@@ -32,32 +32,41 @@ class ChooseMainTypeModal extends React.Component{
     }
     drinkItem(drink){
     	return(
-    		<z key= {drink._id}>
-    		 	<z className="col-sm-3">{drink.type}</z>  
-	           	<z className="col-sm-3">
-	            <img className="img-responsive" onClick={() => this.chooseMainType(drink.type,drink.typeImg)} src={hostServer +drink.typeIcon} />
-	          	</z> 
-	            <z className="col-sm-3">{drink.price} $</z> 
-    		</z>
+    		<div  key= {drink._id}>
+          <div className="col-sm-4 align-center">
+    		       
+	            
+	            <img className="img-responsive main-img col-sm-12" onClick={() => this.chooseMainType(drink.type,drink.typeImg)} src={hostServer +drink.typeIcon} />
+	          	  <hr/>
+                <label className="main-label" >{drink.type} </label>
+
+	                 <label className="main-price" >{drink.price} $</label>
+            </div>
+    		</div>
     		)
     }
  	listDrink(){
  		return(
- 			<div>
- 			{this.props.listMainType.map(this.drinkItem)}
- 			</div>
+      <div className="container">
+   			<div className="row middle-modal">
+   			{this.props.listMainType.map(this.drinkItem)}
+   			</div>
+        </div>
  			)
  	}
   render(){
+    let modalStyle = {
+      backgroudColor: 'gray'
+    }
     return(
-      <Dialog
-              title="waiting" 
-              modal={false}
-              open={this.state.open}
-              > 
-               {this.listDrink()}
-               <button onClick = {this.closeDialog}>OK </button>
-            </Dialog>  
+      <div >
+       <Modal  show={this.state.open} onHide={this.closeDialog}>  
+          <Modal.Body className="big-modal">
+           <div className="nice-title"> Choose your drink</div>
+               {this.listDrink()} 
+          </Modal.Body> 
+        </Modal>
+       </div>
     );
   }
 } 

@@ -78,16 +78,20 @@ class Manager extends React.Component{
  	homeView(){
  		return(
 				<Paper style={{padding: 15, marginTop: 25}}>
-                    <h3>welcome manager {this.props.ManagerStore.manager.fullName}</h3>
+                    <label className="nice-title">Welcome {this.props.ManagerStore.manager.fullName}</label>
+                    <hr/>
                     <List>
-                      <ListItem primaryText="Manage Ingredient"
+                  
+                       <ListItem primaryText="Manage Ingredient" leftIcon={  <i className="fa fa-flask" aria-hidden="true"></i>}
                       onClick={() => this.changeView('ingredient')}/>
                       <Divider />
-                    <ListItem primaryText="Create Drink Recipe"
+                     
+                    <ListItem primaryText="Create Drink Recipe" leftIcon={ <i className="fa fa-glass" aria-hidden="true"></i>}
                     onClick={() => this.changeView('create drink')}
                     />
                     <Divider />
-                    <ListItem primaryText="Create pattern"
+                    
+                    <ListItem primaryText="Create pattern" leftIcon={ <i className="fa fa-paint-brush" aria-hidden="true"></i>}
                     onClick={() => this.changeView('pattern')}
                     />
 
