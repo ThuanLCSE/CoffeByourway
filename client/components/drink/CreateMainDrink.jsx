@@ -3,6 +3,9 @@ import React from 'react';
 
 import UploadImg from './../utils/UploadImg'; 
 
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
 class CreateIngredient extends React.Component{
    constructor(props){
         super(props);
@@ -58,25 +61,19 @@ class CreateIngredient extends React.Component{
     render(){
         return (
             <div>
-               Main type name:
-               <input type = "text" name = "type" value ={this.state.drink.type}
-               onChange={(e) => this.handleChange('type', e)} />
-               <br/>
-               Pattern:
-               <UploadImg buttonName="Up pattern of drink" 
-               setUrl = {this.onUrlChange}/> 
-               <br/>
-                Icon:
-               <UploadImg buttonName="Up Icon of drink" 
-               setUrl = {this.onIconChange}/> 
-               <br/>
-                Price :
-               <input type = "text" name= "price" value ={this.state.drink.price}
-               onChange={(e) => this.handleChange('price', e)}  /> 
-               <br/>
-               <button onClick={this.submitMainDrink}>Create </button>
-              
-           
+                <TextField  floatingLabelText="Main type name"
+                            defaultValue={this.state.drink.type}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('type', e)}/><br/>
+                <UploadImg buttonName="Up pattern of drink" 
+                           setUrl = {this.onUrlChange}/><br/>
+                <UploadImg buttonName="Up Icon of drink" 
+                           setUrl = {this.onIconChange}/><br/>
+                <TextField  floatingLabelText="Price"
+                            defaultValue={this.state.drink.price}
+                            fullWidth={true}
+                            onChange={(e) => this.handleChange('price', e)}/><br/><br/>
+                <RaisedButton label="Create" primary={true} onClick={this.submitMainDrink}/><br/><br/>
             </div>
         );
     }

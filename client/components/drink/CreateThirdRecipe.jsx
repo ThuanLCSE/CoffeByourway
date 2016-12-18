@@ -3,6 +3,8 @@ import React from 'react';
 
 import ListIngredient from './../ingredient/ListIngredient';  
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 class CreateSecondRecipe extends React.Component{
    constructor(props){
         super(props);
@@ -48,9 +50,9 @@ class CreateSecondRecipe extends React.Component{
              	<ListIngredient getListIngredient = {this.props.getListIngredient}
                                 listIngredient = {this.props.listIngredient}
              					tickIngredient = {this.tickIngredient}/>
-             	<button onClick={() => this.submitThirdRecipe()}>
-             	Approve second type recipe for {this.props.mainDrinkType}
-             	</button>
+             	<RaisedButton label={'Approve second type recipe for ' + this.props.mainDrinkType}
+             	              primary={true}
+             	              onClick={() => this.submitThirdRecipe()}/>
             </div>
         );
     }

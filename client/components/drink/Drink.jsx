@@ -1,11 +1,14 @@
 
 import React from 'react';
 
-import DialogMessage from './../utils/DialogMessage';
-import CreateMainDrink from './CreateMainDrink';
-import CreateSecondRecipe from './CreateSecondRecipe';
-import CreateThirdRecipe from './CreateThirdRecipe';
-import ListMainDrink from './ListMainDrink';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+
+import DialogMessage from './../utils/DialogMessage'; 
+import CreateMainDrink from './CreateMainDrink'; 
+import CreateSecondRecipe from './CreateSecondRecipe'; 
+import CreateThirdRecipe from './CreateThirdRecipe'; 
+import ListMainDrink from './ListMainDrink'; 
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -28,8 +31,8 @@ class  Drink extends React.Component{
      createMainType(){
        return(
           <div>
-            Choose existed type Or
-            <RaisedButton onClick={this.openCreateNewMain} label="Create New" primary={true}/>
+            Choose existed type Or 
+            <RaisedButton label="Create new" primary={true} onClick={this.openCreateNewMain}/><br/>
             {this.state.createNewMainType?
             	<CreateMainDrink createMainDrinkType = {this.props.createMainDrinkType} />:
 				<ListMainDrink getListMainDrink = {this.props.getListMainDrink}
@@ -64,13 +67,13 @@ class  Drink extends React.Component{
 
     render(){
         return (
-            <div>
+            <Paper style={{padding: 15, marginTop: 25}}>
             	{this.createMainType()}
                 {this.props.drinkStore.currentMainDrink?this.createSecondRecipe():null}
                 {this.props.drinkStore.currentMainDrink?this.createThirdRecipe():null}
                     <DialogMessage closeMessage = {this.props.clearMessage}
                               message= {this.props.managerStore.message}/>
-            </div>
+            </Paper>
         );
     }
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import {hostServer} from './../../constant/ApiUri';
 import RaisedButton from 'material-ui/RaisedButton'
 
+import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
 
 class ingredientItem extends React.Component{
   constructor(props){
@@ -44,7 +46,10 @@ class ingredientItem extends React.Component{
 
   checkbox(ingredient){
     return (
+        <z>
+          <input type="number" value={this.state.level} onChange={this.handleLevel}/>
           <Checkbox  onCheck={(e,isChecked, code) => this.checkIngredient(e, isChecked,ingredient)}/>
+        </z>
       )
   }
   render(){
@@ -66,7 +71,6 @@ class ingredientItem extends React.Component{
            <td>
               {this.props.tickIngredient?this.checkbox(this.props.ingredient):null}
               {this.props.removeIngredient?this.removeButton(this.props.ingredient._id):null}
-
            </td>
         </tr>
       );

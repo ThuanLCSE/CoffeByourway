@@ -46,6 +46,7 @@ class Manager extends React.Component{
                             changeMainType= {this.props.ManagerAct.changeMainType}
                             getListIngredient = {this.props.ManagerAct.getListIngredient}
                             createSecondDrinkType  = {this.props.ManagerAct.createSecondDrinkType}
+                            createThirdDrinkType  = {this.props.ManagerAct.createThirdDrinkType} 
                             listIngredient= {this.props.IngredientStore.listIngredient}/>
                 </Paper>
             )
