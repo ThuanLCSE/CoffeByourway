@@ -60,7 +60,8 @@ class CanvasEditor extends React.Component {
           left: 0,
           zIndex: 100,
           width: '100%',
-          height: '100%'
+          height: '100%',
+          display: this.props.custom==='ingredient'?'none':'block'
         }
         let webKitUser = {
           width: '100%',
@@ -80,7 +81,7 @@ class CanvasEditor extends React.Component {
           position: 'absolute',
           top: 0,
           left: 0,
-          zIndex: 100,
+          zIndex: 101,
           width: '100%',
           height: '100%',
 
@@ -121,12 +122,14 @@ class CanvasEditor extends React.Component {
                         </div>
 
                   </div>
-                    <div id="drawingArea" style={drawingAreae}>
-                     {this.props.custom === 'ingredient'? 
+                  {this.props.custom === 'ingredient'? 
                      <img ref="cupPicture" src={hostServer +  "static/PaperCupDrinkLayOut.png"}
                       className = "cupLayout" style={platform}/>
                      :<img ref="cupPicture" src={hostServer +  "static/PaperCupPatternLayOut.png"}
                       className = "cupLayout" style={platform}/>}
+                    <div 
+                    id="drawingArea" style={drawingAreae}>
+                     
                       
                       <canvas id="cupCanvas"
                       height={this.state.canvas.height}

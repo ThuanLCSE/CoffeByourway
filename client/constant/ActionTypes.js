@@ -18,6 +18,9 @@ export const addSecondRecipe  = 'addSecondRecipe'
 export const createMainDrinkSuccess = 'createMainDrinkSuccess'  
 export const createSecondRecipeSuccess = 'createSecondRecipeSuccess '   
 export const createThirdRecipeSuccess = 'createThirdRecipeSuccess '    
+export const createPatternSuccess = 'createPatternSuccess '   
+export const getListPatternSuccess = 'getListPatternSuccess '    
+
 
 
 

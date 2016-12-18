@@ -23,10 +23,10 @@ var changePatternDiv = function(url,index){
 	 $('#level'+ index)[0].style.backgroundImage = 'url('+ host + url.replace("\\", "/")+')';
 	},500);
 }
-var setPatternIntoCanvas = function(patternId,left, top, scale){
-	$('#' + patternId).click(function(e){
+var setPatternClickFunc = function(){
+	$('.patternPicker').click(function(e){
 
-			//  console.log(canvas._objects[0]);
+			 console.log(canvas);
 			//  console.log(canvas._ojects.length);
 				if (typeof canvas._objects[0] !== "undefined" ){
 					left = canvas._objects[0].left;
@@ -42,18 +42,17 @@ var setPatternIntoCanvas = function(patternId,left, top, scale){
 
 	  		fabric.Image.fromURL(el.src, function(image) {
 		          image.set({
-		            left: left,
-		            top: top,
+		            left: getRandomNum(20,100),
+		            top: getRandomNum(20,100),
 		            angle: 0,
 		            padding: 10,
 		            cornersize: 10,
 	      	  		hasRotatingPoint:true
 		          });
-		          image.scale(scale).setCoords();
+		          image.scale(1).setCoords();
 		          canvas.add(image);
 		        });
   	});
-  	// $('#'+ patternId).click();
 }
 var applyCanvasAndIngrident = function() {
 		//setup front side canvas
@@ -115,7 +114,7 @@ var applyCanvasAndIngrident = function() {
 		    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
 
   		};
-			clearEl.onclick = function() { canvas.clear() };
+			// clearEl.onclick = function() { canvas.clear() };
 
 
 			// $(".colorPicker").click(function(e){
@@ -184,8 +183,8 @@ var applyCanvasAndIngrident = function() {
 
   var addPatternToShirt = document.getElementById('addPatternToShirt');
   addPatternToShirt.dispatchEvent(addPatternEvent);
-  addPatternToShirt.click = function(patternId,left, top,scale){
-	setPatternIntoCanvas(patternId,left, top,scale);
+  addPatternToShirt.click = function(){
+	setPatternClickFunc();
  	}
  	var colorEvent = new MouseEvent('click', {
     'view': window,

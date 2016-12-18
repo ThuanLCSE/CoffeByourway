@@ -24,6 +24,7 @@ class ListIngredient extends React.Component{
                  <IngredientItem 
                   key = {ingredient._id}
                   ingredient = {ingredient} 
+                  removeIngredient = {this.props.removeIngredient}
                   tickIngredient = {this.props.tickIngredient} />
               )
             }

@@ -1,9 +1,11 @@
 import React from 'react';
 import {hostServer} from './../../constant/ApiUri';
 import RaisedButton from 'material-ui/RaisedButton'
+import Checkbox from 'material-ui/Checkbox';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
+
 
 class ingredientItem extends React.Component{
   constructor(props){
@@ -36,9 +38,8 @@ class ingredientItem extends React.Component{
   removeButton(ingredientId){
     return (
       <div>
-          <input type="text" value={this.state.level} onChange={this.handleLevel}/>
-          <RaisedButton  onClick={() => this.removeIngredient(ingredientId)}
-          Remove
+          
+          <RaisedButton label="remove"  onClick={() => this.removeIngredient(ingredientId)} 
           />
       </div>
       )

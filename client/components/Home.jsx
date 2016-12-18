@@ -52,7 +52,9 @@ class Home extends React.Component{
                      getListSecondRecipe= {this.props.CustomerAct.getListSecondRecipe}
                     getListThirdRecipe= {this.props.CustomerAct.getListThirdRecipe}
                     customCup = {this.props.CustomCupStore}
-                    drinkStore = {this.props.DrinkStore} />
+                    drinkStore = {this.props.DrinkStore} 
+                    getListPattern= {this.props.CustomerAct.getListPattern}
+                    patternStore = {this.props.PatternStore}   />
       )
   }
 	  render(){
@@ -69,7 +71,8 @@ class Home extends React.Component{
 const mapStateToProps = state => ({
   CustomerStore: state.CustomerStore,
 	DrinkStore: state.DrinkStore,
-	CustomCupStore: state.CustomCupStore
+	CustomCupStore: state.CustomCupStore,
+    PatternStore: state.PatternStore
 });
 
 const mapDispatchToProps = dispatch => ({

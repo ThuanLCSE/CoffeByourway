@@ -35,6 +35,20 @@ export function getListSecondRecipe(type) {
         });
     };
 } 
+export function getListPattern() { 
+    return function (dispatch) {
+        return restApi.get(api.listAllPattern).then((response) => { 
+           dispatch({ type: actType.getListPatternSuccess,
+                     listPattern : response.listPattern}
+                   );
+        }).catch((err) => {
+            console.log(err);
+            dispatch({ type: actType.customerActionFail,
+                     message: err.responseText
+                    });
+        });
+    };
+}
 export function getListThirdRecipe(type) { 
 
     return function (dispatch) {

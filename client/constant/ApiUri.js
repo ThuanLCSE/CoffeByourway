@@ -12,7 +12,9 @@ export const listAllIngredient = hostServer + 'api/ingre/getAll'
 export const uploadFileUrl = hostServer + 'api/upload' 
 export const createDrink = hostServer + 'api/drink/create'
 export const checkSignIn = hostServer + 'api/mng/checkSignIn'
+export const createCustomCup = hostServer +'api/custom/create'
+export const createPattern = hostServer + 'api/patternCtrl/create'
 
-
+export const listAllPattern = hostServer + 'api/patternCtrl/getAll' 
 
 

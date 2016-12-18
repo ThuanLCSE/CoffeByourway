@@ -1,4 +1,5 @@
 var drinkContrl = require('../controller/drink.ctrl'); 
+var customCupCtrl = require('../controller/customCup.ctrl'); 
 
 module.exports = function(app){
 	 
@@ -8,5 +9,7 @@ module.exports = function(app){
 	.get(drinkContrl.getSecondRecipeByType);
 	app.route('/api/coffee/thirdRecipe/:drinkType')
 	.get(drinkContrl.getThirdRecipeByType);
+	app.route('/api/custom/create').
+	post(customCupCtrl.create);
 	
 }

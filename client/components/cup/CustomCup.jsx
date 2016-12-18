@@ -24,43 +24,41 @@ class CustomCup extends React.Component {
         
          this.waitingProgress = this.waitingProgress.bind(this); 
          this.chooseMainTypeModal = this.chooseMainTypeModal.bind(this);
-         this.recipeItem = this.recipeItem.bind(this);
-         this.listSecondRecipe = this.listSecondRecipe.bind(this);
+         this.recipeItem = this.recipeItem.bind(this); 
          this.goThirdStep = this.goThirdStep.bind(this);
          this.goSecondStep = this.goSecondStep.bind(this);
          this.listSecondRecipe = this.listSecondRecipe.bind(this);
+          this.listPattern = this.listPattern.bind(this);
          this.listThirdRecipe = this.listThirdRecipe.bind(this);
          this.recipeThirdItem = this.recipeThirdItem.bind(this);
          this.checkOutCup = this.checkOutCup.bind(this);
+         this.reportIngredient = this.reportIngredient.bind(this);
+
  
 
 
     }
     componentWillMount(){ 
         this.props.getFirstStepCustomData();
+         this.props.getListPattern();
     }
      
     componentDidUpdate(prevProps, prevState){
-     
-      if (prevProps.drinkStore.listMainDrink.length === 0 && this.props.drinkStore.listMainDrink.length > 0){
+      var prePropsNotLoadYet = (prevProps.drinkStore.listMainDrink.length === 0) || (prevProps.patternStore.listPattern.length === 0);
+      var nowLoaded =  (this.props.drinkStore.listMainDrink.length > 0)  && (this.props.patternStore.listPattern.length > 0);
+      if (  prePropsNotLoadYet   && nowLoaded){
         this.callApplyCupCanvas(); 
+        this.callApplyPatternFunc();
       } 
 
   
-    }
-    
-
-
-    callAddPatternToShirt(top, left, scale){
-      var patternId = this.state.imgPaternTagId;
-      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale);
-    }
+    } 
 
     callApplyCupCanvas(){ 
       document.getElementById('applyCupCanvas').click(); 
     }
-    callApplyColorChange(){
-     document.getElementById('applyColorChange').click();
+    callApplyPatternFunc(){
+     document.getElementById('addPatternToShirt').click();
     } 
 
     takePreviewBeforSubmit() {
@@ -85,16 +83,16 @@ class CustomCup extends React.Component {
         )
     }
     chooseSecondRecipe(recipe){
-      this.setState({custom: 'ingredient'})
       document.getElementById('handleIngredientPattern').value = recipe.img;
       document.getElementById('handleIngredientPattern').click(recipe.level);
       this.props.addSecondRecipe(recipe);
+      this.setState({custom: 'ingredient'})
     }
     chooseThirdRecipe(recipe){
-      this.setState({custom: 'ingredient'})
       document.getElementById('handleIngredientPattern').value = recipe.img;
       document.getElementById('handleIngredientPattern').click("4");
       this.props.addThirdRecipe(recipe);
+      this.setState({custom: 'ingredient'})
     }
     recipeItem(recipe, level){
       if (level === recipe.level){
@@ -175,17 +173,61 @@ class CustomCup extends React.Component {
         </div>
         )
     }
-    
+    ingredientItem(ingredient){
+      return(
+          <div>
+            <img width="10px" height="10px" src={hostServer+ ingredient.icon}/>{ingredient.type}: {ingredient.quantity}
+          </div>
+        )
+    }
+    reportIngredient(){
+      var ingreList = [];
+      for (var i in this.props.customCup.listSecondRecipe){
+        var newIngre = this.props.customCup.listSecondRecipe[i];
+             for (var j in ingreList){
+              if (ingreList[j].type === newIngre.type){
+                ingreList[j].quantity += newIngre.quantity;
+                newIngre = null;
+              }
+             }
+           if (newIngre) {
+            ingreList.push(newIngre);
+           }
+      }
+      return(
+        <div>
+          {ingreList.map((ingredient) => this.ingredientItem(ingredient))}
+        </div>
+        )
+    }
+    patternItem(pattern){
+      return(
+          <div>
+            <img width="50px" height="50px" className="patternPicker"
+            onClick={() => this.setState({custom: 'pattern'})}
+             src={hostServer+ pattern.url}/>
+          </div>
+        )
+    }
+    listPattern(){
+       return(
+        <div> 
+          {this.props.patternStore.listPattern.map((patt) => this.patternItem(patt))} 
+        </div>
+        )
+    }
     render() {
         return (
             <div className="container">
 
                 <div className="col-sm-4">
                   <DrawingControl customPattern = {() => this.setState({custom: 'pattern'})}/>
+                  {this.listPattern()}
                 </div>
 
                 <Paper className="col-sm-5" style={{height:'80vh'}}>
                           <CanvasEditor custom = {this.state.custom}/>
+                          {this.reportIngredient()}
                 </Paper>
                 <div className="col-sm-3">
 

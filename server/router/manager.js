@@ -1,6 +1,8 @@
 var managerCtrl = require('../controller/manager.ctrl'); 
 var ingredientCtrl = require('../controller/ingredient.ctrl'); 
+var patternCtrl = require('../controller/pattern.ctrl'); 
 var drinkCtrl = require('../controller/drink.ctrl'); 
+var customCupCtrl = require('../controller/customCup.ctrl'); 
 
 module.exports = function(app){
 	 
@@ -21,6 +23,13 @@ module.exports = function(app){
 
 	app.route('/api/drink/create')
 	.post(managerCtrl.checkManager,drinkCtrl.create);
-	
+
+	app.route('/api/custom/approve/:customCupId').
+	get(customCupCtrl.getCustomCupByID, customCupCtrl.approve, customCupCtrl.save);
+	app.route('/api/patternCtrl/create')
+	.post(managerCtrl.checkManager,patternCtrl.create);
+	app.route('/api/patternCtrl/getAll')
+	.get(patternCtrl.getAll);
+ 
 	
 }

@@ -11,6 +11,8 @@ var recipeSchema = new Schema({
         required: 'level is required', 
         trim: true
     }, 
+    img: String,
+    icon: String,
   	quantity: {
         type: Number, 
         default: 0

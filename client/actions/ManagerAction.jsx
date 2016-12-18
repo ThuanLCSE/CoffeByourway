@@ -111,6 +111,43 @@ export function createIngredient(data) {
 		});
 	};
 }
+export function createPattern(data) {
+	
+	// listAllIngredient
+	var newPatt = {
+		url: data.url
+	}
+    return function (dispatch) {
+	  	return restApi.post(api.createPattern,newPatt).then((response) => {
+	    	
+	       dispatch({ type: actType.createPatternSuccess,
+                     pattern : response.pattern,
+                    message: response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
+
+
+export function getListPattern() { 
+    return function (dispatch) {
+	  	return restApi.get(api.listAllPattern).then((response) => { 
+	       dispatch({ type: actType.getListPatternSuccess,
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: actType.managerActionFail,
+                     message: err.responseText
+                    });
+		});
+	};
+}
 export function createMainDrinkType(data) {
 	
 	// listAllIngredient

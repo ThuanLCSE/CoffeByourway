@@ -6,6 +6,8 @@ import * as ManagerAct from './../actions/ManagerAction.jsx';
 import SignIn from './manager/SignIn.jsx';
 import SignUp from './manager/SignUp.jsx';
 import Ingredient from './ingredient/Ingredient.jsx';
+import Pattern from './pattern/Pattern.jsx';
+
 import Drink from './drink/Drink.jsx';
 
 import Paper from 'material-ui/Paper';
@@ -21,6 +23,8 @@ class Manager extends React.Component{
         };
         this.changeView = this.changeView.bind(this);
         this.viewIngredient = this.viewIngredient.bind(this);
+        this.viewPattern = this.viewPattern.bind(this);
+
         this.homeView = this.homeView.bind(this);
         this.notAuthView = this.notAuthView.bind(this);
         this.viewCreateDrink = this.viewCreateDrink.bind(this);
@@ -51,6 +55,16 @@ class Manager extends React.Component{
                 </Paper>
             )
     }
+    viewPattern(){
+         return (
+            <Pattern  
+                        createPattern =  {this.props.ManagerAct.createPattern}
+                        clearMessage = {this.props.ManagerAct.clearMessage}
+                        managerStore = {this.props.ManagerStore}
+                        getListPattern = {this.props.ManagerAct.getListPattern}
+                        listPattern = {this.props.PatternStore.listPattern}/>
+            )
+    }
     viewIngredient(){
          return (
             <Ingredient removeIngredient = {this.props.ManagerAct.removeIngredient}
@@ -71,6 +85,10 @@ class Manager extends React.Component{
                       <Divider />
                     <ListItem primaryText="Create Drink Recipe"
                     onClick={() => this.changeView('create drink')}
+                    />
+                    <Divider />
+                    <ListItem primaryText="Create pattern"
+                    onClick={() => this.changeView('pattern')}
                     />
 
                     </List>
@@ -95,6 +113,8 @@ class Manager extends React.Component{
              <div id="MnHomePage" className = "col-sm-9" >
 				        {this.state.view === 'create drink'?this.viewCreateDrink():null}
                 {this.state.view === 'ingredient'?this.viewIngredient():null}
+                 {this.state.view === 'pattern'?this.viewPattern():null}
+
              </div>
              <div className = "col-sm-3">
                  {!this.props.ManagerStore.authenticated?this.notAuthView(): this.homeView()}
@@ -108,7 +128,8 @@ const mapStateToProps = state => ({
 	ManageDrinkStore: state.ManageDrinkStore,
     ManagerStore: state.ManagerStore,
     DrinkStore: state.DrinkStore,
-    IngredientStore: state.IngredientStore
+    IngredientStore: state.IngredientStore,
+    PatternStore: state.PatternStore
 });
 
 const mapDispatchToProps = dispatch => ({
