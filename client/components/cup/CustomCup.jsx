@@ -1,6 +1,13 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import {
+  Step,
+  Stepper,
+  StepButton
+} from 'material-ui/Stepper';
+
 import Dialog from 'material-ui/Dialog';
 import {hostServer} from './../../constant/ApiUri';
 import WaitingModal from './../utils/WaitingModal.jsx';  
@@ -33,7 +40,8 @@ class CustomCup extends React.Component {
          this.recipeThirdItem = this.recipeThirdItem.bind(this);
          this.checkOutCup = this.checkOutCup.bind(this);
          this.reportIngredient = this.reportIngredient.bind(this);
-
+         this.handleNext = this.handleNext.bind(this);
+         this.handlePrev = this.handlePrev.bind(this);
  
 
 
@@ -97,18 +105,21 @@ class CustomCup extends React.Component {
     recipeItem(recipe, level){
       if (level === recipe.level){
          return(
-          <z key= {recipe._id}>
-            <z className="col-sm-3">{recipe.type}</z>  
-                <z className="col-sm-3">
-                <img height="20" width="20" onClick={() => this.chooseSecondRecipe(recipe)} 
-                src={hostServer +recipe.icon} />
-                </z> 
-                <z className="col-sm-3">{recipe.price} $</z> 
-          </z>
+          <Paper className="recipeItem"
+                key= {recipe._id}
+                onClick={() => this.chooseSecondRecipe(recipe)}>
+            <div className="recipeItemDetail">
+                <div className="col-sm-6" style={{padding:0}}>
+                <img height="100" width="100%" src={hostServer +recipe.icon} />
+                </div>
+                <div className="col-sm-6"><h4>{recipe.type}</h4></div>  
+                <div className="col-sm-6"><h4><span className="fa fa-usd" style={{color:'green'}}></span>{recipe.price}</h4></div> 
+            </div>
+          </Paper>
         )
        } else {
         return (
-            <z></z>
+            <div></div>
           )
        }
      
@@ -116,30 +127,45 @@ class CustomCup extends React.Component {
     recipeThirdItem(recipe){
    
        return(
-        <z key= {recipe._id}>
-          <z className="col-sm-3">{recipe.type}</z>  
-              <z className="col-sm-3">
-              <img height="20" width="20" onClick={() => this.chooseThirdRecipe(recipe)} 
-              src={hostServer +recipe.icon} />
-              </z> 
-              <z className="col-sm-3">{recipe.price} $</z> 
-        </z>
+        <Paper className="recipeItem"
+                key= {recipe._id}
+                onClick={() => this.chooseThirdRecipe(recipe)}>
+            <div className="recipeItemDetail">
+                <div className="col-sm-6" style={{padding:0}}>
+                <img height="100" width="100%" src={hostServer +recipe.icon} />
+                </div>
+                <div className="col-sm-6"><h4>{recipe.type}</h4></div>  
+                <div className="col-sm-6"><h4><span className="fa fa-usd" style={{color:'green'}}></span>{recipe.price}</h4></div> 
+            </div>
+        </Paper>
       )
      
     }
+    
+    handleNext() {
+        if (this.state.step == 'second') {
+          this.goThirdStep();
+        }
+      };
 
+      handlePrev() {
+        if (this.state.step == 'third') {
+          this.goSecondStep(this.props.drinkStore.currentMainDrink);
+        }
+      };
+    
     goThirdStep(){
       this.setState({custom: 'ingredient'})
       this.props.getListThirdRecipe(this.props.drinkStore.currentMainDrink);
       this.setState({
-        step: "third"
+        step: 'third'
       });
     }
     goSecondStep(type){
       this.setState({custom: 'ingredient'})
       this.props.getListSecondRecipe(type);
       this.setState({
-        step: "second"
+        step: 'second'
       });
     }
     checkOutCup(){
@@ -159,17 +185,14 @@ class CustomCup extends React.Component {
           <br/>
            Level 4
           {this.props.drinkStore.listSecondRecipe.map((recipe) => this.recipeItem(recipe,"4"))}
-          <button onClick={this.goThirdStep}>Next step</button>
         </div>
         )
     }
     listThirdRecipe(){
       return(
         <div>
-          Level 1
+          Level 4
           {this.props.drinkStore.listThirdRecipe.map((recipe) => this.recipeThirdItem(recipe))}
-          <br/>
-           <button onClick={this.checkOutCup}>Finish</button>
         </div>
         )
     }
@@ -218,24 +241,55 @@ class CustomCup extends React.Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{backgroundColor:'white'}}>
 
-                <div className="col-sm-4">
+                <div className="col-sm-3">
                   <DrawingControl customPattern = {() => this.setState({custom: 'pattern'})}/>
                   {this.listPattern()}
                 </div>
 
-                <Paper className="col-sm-5" style={{height:'80vh'}}>
+                <Paper className="col-sm-5" style={{height:'100vh'}}>
                           <CanvasEditor custom = {this.state.custom}/>
                           {this.reportIngredient()}
                 </Paper>
-                <div className="col-sm-3">
+                <div className="col-sm-4">
 
-                    <Paper style={{height:'80vh'}}>
+                    <Paper style={{padding: 15, marginTop: 25}}>
                          
-                        Current Type: {this.props.drinkStore.currentMainDrink}
-                        {this.state.step === "second"?this.listSecondRecipe():null}
-                        {this.state.step === "third"?this.listThirdRecipe():null}
+                         
+                         <Stepper linear={false} activeStep={this.state.step}>
+                          <Step>
+                            <StepButton onClick={() => this.setState({step: 'first'})}></StepButton>
+                          </Step>
+                          <Step>
+                            <StepButton onClick={() => this.setState({step: 'second'})}></StepButton>
+                          </Step>
+                          <Step>
+                            <StepButton onClick={() => this.setState({step: 'third'})}></StepButton>
+                          </Step>
+                        </Stepper>
+                        <div>
+                          Current Type: {this.props.drinkStore.currentMainDrink}
+                            {this.state.step === 'second' ? this.listSecondRecipe():null}
+                            {this.state.step === 'third' ?this.listThirdRecipe():null}
+                          <div style={{marginTop: 12}}>
+                            <FlatButton
+                              label="Back"
+                              disabled={this.state.step === 'first'}
+                              onTouchTap={this.handlePrev}
+                              style={{marginRight: 12}}
+                            />
+                            <RaisedButton
+                              label="Next"
+                              disabled={this.state.step === 'third'}
+                              primary={true}
+                              onTouchTap={this.handleNext}
+                            />
+                          </div>
+                        </div>
+                         
+                         
+                        
                     </Paper>
                 </div>
                  {(this.props.drinkStore.listMainDrink.length <= 0) ?this.waitingProgress():this.chooseMainTypeModal()} 

@@ -14,3 +14,24 @@
 	 user-select: none;
   pointer-events: none;
 }
+.recipeItem {
+    width: 100%;
+    margin-top: 10px;
+    overflow: auto;
+    cursor: pointer;
+}
+
+.recipeItemDetail {
+    height: 100px;
+    text-align: center;
+}
+
+.recipeItemDetail:hover h4{
+    color: #94AF5A;
+    transition: all 0.5s;
+}
+
+.recipeItemDetail h4 {
+    font-weight: bold;
+    color: #999
+}

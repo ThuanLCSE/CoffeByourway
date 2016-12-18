@@ -114,7 +114,7 @@ var applyCanvasAndIngrident = function() {
 		    canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
 
   		};
-			// clearEl.onclick = function() { canvas.clear() };
+			
 
 
 			// $(".colorPicker").click(function(e){
@@ -124,18 +124,7 @@ var applyCanvasAndIngrident = function() {
 			applyColor();
 
 			document.getElementById('remove-selected').onclick = function() {
-			    var activeObject = canvas.getActiveObject(),
-			        activeGroup = canvas.getActiveGroup();
-			    if (activeObject) {
-			      canvas.remove(activeObject);
-			    }
-			    else if (activeGroup) {
-			      var objectsInGroup = activeGroup.getObjects();
-			      canvas.discardActiveGroup();
-			      objectsInGroup.forEach(function(object) {
-			        canvas.remove(object);
-			      });
-			    }
+			    canvas.clear()
 		  	};
 	 	}
  
